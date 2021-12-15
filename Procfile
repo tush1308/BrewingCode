@@ -1,0 +1,1 @@
+web: waitress-serve --port=8000 final_hackathon.wsgi:application
