@@ -1,0 +1,1 @@
+web: gunicorn final_hackathon.wsgi --log-file -
