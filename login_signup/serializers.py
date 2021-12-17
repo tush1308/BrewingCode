@@ -1,5 +1,9 @@
 from rest_framework import serializers
 from .models import *
+from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth import authenticate, login
+
+
 class MyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model  = MyUser
