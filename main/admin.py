@@ -11,4 +11,8 @@ class ItemTypeModelAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class ItemTypeModelAdmin(admin.ModelAdmin):
-    list_display=['order_id','user','product','total_bill','payment_method','created_at']
+    list_display=['order_id','user','total_bill','payment_method','created_at']
+
+@admin.register(OrderItem)
+class OrderItemModelAdmin(admin.ModelAdmin):
+    list_display=['order_item','price','quantity','total_price']

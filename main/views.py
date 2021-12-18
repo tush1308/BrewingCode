@@ -30,6 +30,9 @@ class OrderView(generics.ListCreateAPIView):
     queryset=Order.objects.all()
     serializer_class=OrderSerializer
     permission_classes=[IsAuthenticated]
+    def create(self, request, *args, **kwargs):
+        p=Order
+        return super().create(request, *args, **kwargs)
 
 class OrderView_detail(generics.RetrieveAPIView):
     queryset=Order.objects.all()
