@@ -184,4 +184,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOWED_ORIGINS = [
+    "https://rats-hackathon.herokuapp.com/",
+    "http://localhost:8000",
+]
