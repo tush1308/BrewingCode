@@ -185,6 +185,6 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
 CORS_ALLOWED_ORIGINS = [
-    "https://rats-hackathon.herokuapp.com/",
+    "https://rats-hackathon.herokuapp.com",
     "http://localhost:8000",
 ]
