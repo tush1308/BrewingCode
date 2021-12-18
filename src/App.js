@@ -2,6 +2,8 @@ import './App.css';
 import Login from '../src/pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
 import Cart from './pages/Cart/Cart';
+import Home from './pages/Home/Home'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,6 +20,7 @@ function App() {
       <Route exact path="/"><Login/></Route>
       <Route path="/SignUp"><SignUp/></Route>
       <Route path="/Cart"><Cart/></Route>
+      <Route path="/Home"><Home/></Route>
       </Switch>
     </div>
     </Router>
