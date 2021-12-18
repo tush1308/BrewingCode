@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, StyleSheet, View, ImageBackground, TouchableOpacity } from 'react-native';
 // import { SocialIcon } from 'react-native-elements';
 import Input from '../components/input';
@@ -8,12 +8,41 @@ import { buttonColor,
     bgColor, } from '../config/color';
 import { TextInput } from 'react-native-gesture-handler';
 
+const BASE_URL="https://rats-hackathon.herokuapp.com/login-signup"
+
 export default function SignUp({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fname,setFname]=useState("");
   const [lname,setLname]=useState("");
-  
+
+  const Register=async()=>{
+    console.log(BASE_URL+"/register/")
+    try{
+      const result=await fetch(BASE_URL+"/register/",{
+        method:'POST',
+        headers:{
+          'Content-Type': 'application/json',
+          'Accept':'application/json'
+        },
+        body: JSON.stringify({
+          "email":email,
+          "first_name":fname,
+          "last_name":lname,
+          "password":password,
+          "business_name":"Business1",
+          "business_location":"location1",
+        }),
+      });
+      const json= await result.json();
+      console.log(json);
+    }catch(error){
+      console.log("Error"+error);
+    }finally{
+        navigation.navigate('Home');
+    }
+  }
+
   return (
     <View style={styles.container}>
         <View style={styles.form}>
@@ -65,7 +94,7 @@ export default function SignUp({ navigation }) {
           </View>
 
           <View style={{marginLeft:5}}>
-            <TouchableOpacity style={styles.button} onPress={()=>{}}> 
+            <TouchableOpacity style={styles.button} onPress={()=>{Register()}}> 
               <Text style={{color:buttonTextColor}}>SignUp</Text>
             </TouchableOpacity>
           </View>

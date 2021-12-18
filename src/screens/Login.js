@@ -6,11 +6,35 @@ import PassInput from '../components/passInput';
 import { buttonColor,
     buttonTextColor,
     bgColor, } from '../config/color';
+const BASE_URL="https://rats-hackathon.herokuapp.com/login-signup"
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
+    const SignIn=async()=>{
+        console.log(BASE_URL+"/login/")
+        try{
+          const result=await fetch(BASE_URL+"/login/",{
+            method:'POST',
+            headers:{
+              'Content-Type': 'application/json',
+              'Accept':'application/json'
+            },
+            body: JSON.stringify({
+              "username": email,
+              "password": password,
+            }),
+          });
+          const json= await result.json();
+          console.log(json);
+        }catch(error){
+          console.log("Error: "+error);
+        }finally{
+            navigation.navigate('Home');
+        }
+      }
+
     return (
       <View style={styles.container}>
           <View style={styles.form}>
@@ -44,7 +68,7 @@ export default function Login({ navigation }) {
   
             <View style={{marginLeft:5}}>
               <TouchableOpacity style={styles.button}
-                onPress={()=>{}}
+                onPress={()=>{SignIn()}}
                 >
                 <Text style={{color:buttonTextColor}}>Login</Text>
               </TouchableOpacity>
