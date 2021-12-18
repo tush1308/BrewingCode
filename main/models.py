@@ -19,9 +19,9 @@ class Item(models.Model):
     item_type=models.ForeignKey(ItemType,on_delete=models.CASCADE)
     item_name=models.CharField(max_length=200)
     item_brand=models.CharField(max_length=100)
-    item_price=models.DecimalField()
+    item_price=models.IntegerField()
     available_quantity=models.IntegerField(null=False,blank=False)
-    owned_by=models.ForeignKey(MyUser.is_superuser,on_delete=models.CASCADE)
+    owned_by=models.ForeignKey(MyUser,on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.item_name
