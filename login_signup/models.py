@@ -37,13 +37,15 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class MyUser(AbstractUser):
-    user_id    = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=50,blank=False)
-    last_name  = models.CharField(max_length=50,blank=False)
-    email      = models.EmailField(max_length=100,unique=True)
-    username   = None
-    created_at = models.DateTimeField(auto_now_add=True)
-    objects    = UserManager()  # used the above manager here
+    user_id           = models.AutoField(primary_key=True)
+    first_name        = models.CharField(max_length=50,blank=False)
+    last_name         = models.CharField(max_length=50,blank=False)
+    email             = models.EmailField(max_length=100,unique=True)
+    username          = None
+    business_name     = models.CharField(max_length=100)
+    business_location = models.CharField(max_length=100)
+    created_at        = models.DateTimeField(auto_now_add=True)
+    objects           = UserManager()  # used the above manager here
 
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=[]

@@ -7,21 +7,24 @@ from django.contrib.auth import authenticate, login
 class MyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model  = MyUser
-        fields = ['user_id','email','first_name','last_name']
+        fields = ['user_id','email','first_name','last_name','business_name','business_location']
         
 
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model  = MyUser
-        fields = ['email','first_name','last_name','password']
+        fields = ['email','first_name','last_name','password','business_name','business_location']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = MyUser(
-            email      = validated_data['email'],
-            first_name = validated_data['first_name'],
-            last_name  = validated_data['last_name']
+            email             = validated_data['email'],
+            first_name        = validated_data['first_name'],
+            last_name         = validated_data['last_name'],
+            business_name     = validated_data['business_name'],
+            business_location = validated_data['business_location']
         )
         user.set_password(validated_data['password'])
         user.save()
         return user
+
