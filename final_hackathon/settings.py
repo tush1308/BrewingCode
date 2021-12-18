@@ -187,4 +187,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 CORS_ALLOWED_ORIGINS = [
     "https://rats-hackathon.herokuapp.com",
     "http://localhost:8000",
+    "http://localhost:3000",
+
 ]
