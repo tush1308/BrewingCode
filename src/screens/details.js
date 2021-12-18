@@ -4,29 +4,33 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { URL } from "../utils/api";
 export default function Detail({navigation,route}){
-    const id=route.params;
-    console.log(id+""+URL);
+    
+    const {info}=route.params;
+    const id=info.id;
+    // console.log(id);
+    const token=info.token;
+    // console.log(token);
     const [data,setData]=useState([]);
     const [loading,setLoading]=useState(true);
-    const getDetails=async(id)=>{
+    const getDetails=async(id,token)=>{
         try{
-            const result=await fetch(URL+"main/item_detail/1/",{
+            const result=await fetch(URL+"main/item_detail/"+id+"/",{
                 method:'GET',
-                headers: {'Authorization': 'token 5f43980f971f33b5f8be85dadfa8ffbb10c2dc09'},
+                headers: {'Authorization': token},
             });
             const json= await result.json();
-            console.log(json);
+            // console.log(json);
             setData(json);
         }catch(error){
             console.log(error);
             // Alert.alert(error);
         }finally{
-            console.log(data);
+            // console.log(data);
             setLoading(false);
         }
     }
     useEffect(() => {
-        getDetails();
+        getDetails(id,token);
       }, []);
     return(
         <View style={styles.container}>
@@ -71,6 +75,6 @@ const styles = StyleSheet.create({
         paddingLeft:5,
         flexDirection:'row',
         alignItems:'center',
-        paddingHorizontal:10,
+        padding:10,
     }
   });

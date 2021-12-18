@@ -3,17 +3,26 @@ import { Text, StyleSheet, View, ImageBackground, TouchableOpacity } from 'react
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Input from '../components/input';
 import PassInput from '../components/passInput';
-import { buttonColor,
-    buttonTextColor,
-    bgColor, } from '../config/color';
-const BASE_URL="https://rats-hackathon.herokuapp.com/login-signup"
+import { buttonColor,buttonTextColor,bgColor, } from '../config/color';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BASE_URL } from '../utils/api';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
+    const [token,setToken]=useState("");
+    const storeToken = async (token) => {
+        try {
+          await AsyncStorage.setItem('token', token)
+        } catch (e) {
+          console.log(e);
+        }finally{
+            navigation.navigate('Home');
+        }
+      }
+
     const SignIn=async()=>{
-        console.log(BASE_URL+"/login/")
+        // console.log(BASE_URL+"/login/");
         try{
           const result=await fetch(BASE_URL+"/login/",{
             method:'POST',
@@ -28,10 +37,12 @@ export default function Login({ navigation }) {
           });
           const json= await result.json();
           console.log(json);
+          setToken(json.token);
         }catch(error){
           console.log("Error: "+error);
         }finally{
-            navigation.navigate('Home');
+            storeToken(token);
+            // navigation.navigate('Home');
         }
       }
 
