@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,41 +14,93 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import login from "../../assets/login.jpg";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const theme = createTheme();
 
 export default function SignInSide() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(true);
+
+  const matches = useMediaQuery("(max-width:600px)");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // eslint-disable-next-line no-console
     const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+    createacc();
   };
+
+  async function createacc() {
+    console.log("hello");
+    try {
+      let result = await fetch(
+        "https://rats-hackathon.herokuapp.com/login-signup/login/",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            username: email,
+            password: password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      result = await result.json();
+      console.log(result);
+    } catch (error) {
+      console.log("Error" + error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
-            item
-            xs={false}
-            sm={4}
-            md={7}
-            sx={{
-              backgroundImage: login,
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: (t) =>
-                t.palette.mode === 'dark' ? t.palette.grey[50] : t.palette.grey[900],
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: login,
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "dark"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
         >
-          <img
-            src={login}
-            style={{ width: "100%", height: "100vh" }}
-            alt="login"
-          />
+          {!matches && (
+            <Grid item xs={4} sm={6.5} md={6} lg={5.5}>
+              <img
+                src={login}
+                style={{ width: "220%", height: "100vh" }}
+                alt="login"
+              />
+            </Grid>
+          )}
         </Grid>
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square style={{backgroundColor:'#90B8F8'}}>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          style={{ backgroundColor: "#90B8F8" }}
+        >
           <Box
             sx={{
               my: 8,
@@ -78,7 +131,10 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                style={{backgroundColor:'white'}}
+                type="email"
+                value={email.trim()}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{ backgroundColor: "white" }}
               />
               <TextField
                 margin="normal"
@@ -89,7 +145,9 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                style={{backgroundColor:'white'}}
+                value={password.trim()}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{ backgroundColor: "white" }}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -100,13 +158,13 @@ export default function SignInSide() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                style={{backgroundColor:'#353941'}}
+                style={{ backgroundColor: "#353941" }}
               >
                 Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>

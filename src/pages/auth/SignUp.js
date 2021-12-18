@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-//signup
+
 const theme = createTheme();
 
 export default function SignUp() {
@@ -19,9 +19,10 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [isLoading, setLoading] = useState(true);
 
-  const cors = require("cors");
+  const [bName, setBName] = useState("");
+  const [bLocation, setBLocation] = useState("");
+  const [isLoading, setLoading] = useState(true);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,6 +46,8 @@ export default function SignUp() {
             first_name: firstName,
             last_name: lastName,
             password: password,
+            business_name: bName,
+            business_location: bLocation,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -60,6 +63,7 @@ export default function SignUp() {
       setLoading(false);
     }
   }
+
   return (
     <div style={{ backgroundColor: "#90B8F8" }}>
       <ThemeProvider theme={theme}>
@@ -90,6 +94,7 @@ export default function SignUp() {
                     id="firstName"
                     label="First Name"
                     autoFocus
+                    type="text"
                     value={firstName.trim()}
                     onChange={(e) => setFirstName(e.target.value)}
                     style={{ backgroundColor: "white" }}
@@ -102,6 +107,7 @@ export default function SignUp() {
                     id="lastName"
                     label="Last Name"
                     name="lastName"
+                    type="text"
                     value={lastName.trim()}
                     onChange={(e) => setLastName(e.target.value)}
                     autoComplete="family-name"
@@ -115,6 +121,7 @@ export default function SignUp() {
                     id="email"
                     label="Email Address"
                     name="email"
+                    type="email"
                     value={email.trim()}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
@@ -135,6 +142,32 @@ export default function SignUp() {
                     style={{ backgroundColor: "white" }}
                   />
                 </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="bName"
+                    label="Business Name"
+                    name="bName"
+                    type="text"
+                    value={bName.trim()}
+                    onChange={(e) => setBName(e.target.value)}
+                    style={{ backgroundColor: "white" }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="bLocation"
+                    label="Business Location"
+                    name="bLocation"
+                    type="text"
+                    value={bLocation.trim()}
+                    onChange={(e) => setBLocation(e.target.value)}
+                    style={{ backgroundColor: "white" }}
+                  />
+                </Grid>
               </Grid>
               <Button
                 type="submit"
@@ -142,7 +175,6 @@ export default function SignUp() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 style={{ backgroundColor: "#353941" }}
-                //onSubmit={createacc}
               >
                 Sign Up
               </Button>
