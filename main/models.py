@@ -35,6 +35,6 @@ class Order(models.Model):
     address=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 
