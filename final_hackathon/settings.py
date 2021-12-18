@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-qfd(u(sf$gi_$(8h9%yjv5amtwpk2%*cs4-gl)l&pun=24y5gn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['rats-hackathon.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -184,4 +184,9 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
+CORS_ALLOWED_ORIGINS = [
+    "https://rats-hackathon.herokuapp.com",
+    "http://localhost:8000",
+    "http://localhost:3000",
 
+]

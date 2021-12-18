@@ -38,5 +38,6 @@ urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('oauth-login-signup/',include('oauth_login.urls')),
     path('accounts/', include('allauth.urls')),
+    path('main/',include('main.urls')),
 
 ]
