@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-qfd(u(sf$gi_$(8h9%yjv5amtwpk2%*cs4-gl)l&pun=24y5gn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['rats-hackathon.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
