@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import login from "../../assets/login.jpg";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import  { Redirect } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -60,6 +61,16 @@ export default function SignInSide() {
       result = await result.json();
       console.log(result);
       saveToken(result.token);
+      if(result.token){
+        console.log("hello")
+        return(<Redirect
+  to={{
+    pathname: "/Home",
+    // search: "?utm=your+face",
+    // state: { referrer: currentLocation }
+  }}
+/>)
+      }
     } catch (error) {
       console.log("Error" + error);
     } finally {

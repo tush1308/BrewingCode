@@ -11,6 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import  { Redirect } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -22,6 +23,8 @@ export default function SignUp(props) {
   const [bName, setBName] = useState("");
   const [bLocation, setBLocation] = useState("");
   const [isLoading, setLoading] = useState(true);
+
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,15 +56,22 @@ export default function SignUp(props) {
             Accept: "application/json",
           },
         }
+        
       );
       result = await result.json();
       console.log(result);
+      if(result.old_token){
+        console.log("hellojkk")
+        return <Redirect to="/" />
+      }
     } catch (error) {
       console.log("Error" + error);
     } finally {
       setLoading(false);
     }
   }
+
+  
 
   return (
     <div style={{ backgroundColor: "#90B8F8" }}>

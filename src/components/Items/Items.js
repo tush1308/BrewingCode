@@ -54,7 +54,6 @@ useEffect(() => {
   }, []);
   return (
     <>
-        
         <Box ml={5} mr={5} pl={5} pr={5 } mt={2} pt={2} mb={1} pb={1}> 
         <Grid
           container

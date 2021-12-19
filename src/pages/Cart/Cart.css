@@ -63,7 +63,11 @@
 }
 
 .add-minus-quantity .number{
+  font-size: larger;
+  color: #90B8F8;
   background-color: black;
+  padding: 2% 7% 2% 7%;
+  border-radius: 20%;
 }
 
 .add-minus-quantity button {
