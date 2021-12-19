@@ -29,7 +29,7 @@ class MyUserDetail(generics.RetrieveUpdateAPIView):
     serializer_class = MyUserSerializer
     permission_classes=IsAuthenticated
  
- 
+
 
 class Registration(generics.CreateAPIView):
     serializer_class=RegistrationSerializer
@@ -40,9 +40,9 @@ class Registration(generics.CreateAPIView):
             if serializer.is_valid():
                 my_user = serializer.save()
                 token = Token.objects.get(user = my_user).key
-                current_site = 'http://127.0.0.1:8000'
+                current_site = 'https://rats-hackathon.herokuapp.com'
                 relative_link = reverse('verifyEmail')          
-                absurl = current_site + relative_link + "?token="+str(token) #to integrate with frontend   
+                absurl = current_site + relative_link + "?token="+str(token) 
                 email_body = 'Hi' + my_user.first_name + 'Use link below to verify your email \n' + absurl  
                 data_email = {'email_body': email_body, 'to_email': my_user.email, 'email_subject':'Verify your email'}     
                 Util.send_email(data_email)           
