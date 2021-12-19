@@ -113,7 +113,6 @@ useEffect(() => {
                       <div className="price-quantity">
                       <Typography
                         variant="body2"
-
                         className="item-element"
                         style={{ color: "#353941" }}
                       >
@@ -121,7 +120,6 @@ useEffect(() => {
                       </Typography>
                       <Typography
                         variant="body2"
-                        
                         className="item-element"
                         style={{ color: "#353941" }}
                       >
