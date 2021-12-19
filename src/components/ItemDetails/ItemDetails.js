@@ -1,4 +1,5 @@
 import { Box, Paper } from "@mui/material";
+import { Link } from "react-router-dom";
 export default function ItemDetails()
 {
     return(<>
@@ -13,11 +14,13 @@ export default function ItemDetails()
         },
       }}
     >
+      
     <Paper elevation={3}>
     <div className="item-image">
         hello
     </div>
     </Paper>
+    
     </Box>
     </>);
 }
