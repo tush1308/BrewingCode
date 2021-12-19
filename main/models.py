@@ -33,11 +33,13 @@ class OrderItem(models.Model):
     quantity=models.IntegerField(default=1)
     total_price=models.IntegerField(null=True,blank=True)
     def __str__(self):
-        return str(self.order_item)
+        return '%s %s' % (self.order_item,self.quantity)
     def save(self,*args,**kwargs):
         self.price=self.order_item.item_price
         self.total_price=self.price*self.quantity
         super(OrderItem,self).save(*args,**kwargs)
+
+
 class Order(models.Model):
     order_id=models.AutoField(primary_key=True)
     user=models.ForeignKey(MyUser,on_delete=models.CASCADE)
@@ -48,11 +50,9 @@ class Order(models.Model):
     city=models.CharField(max_length=50,null=False,blank=False)
     created_at=models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return str(self.user)
-    def save(self,*args,**kwargs):
-        self.total_bill=self.ordered_items.total_price
-        super(Order,self).save(*args,**kwargs)
-        
+        return str(self.payment_method)
+
+
 
 
 

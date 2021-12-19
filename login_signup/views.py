@@ -80,15 +80,6 @@ def verifyEmail(request):
         return Response(data)
 
 
-
-
-
-
-
-
-
-
-
 class LoginView(generics.CreateAPIView):
     serializer_class=loginSerializer
     def post(self,request):
