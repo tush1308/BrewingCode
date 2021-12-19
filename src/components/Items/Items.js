@@ -14,7 +14,6 @@ import "./Items.css";
 import { BLUE2, BLACK } from "../../styles/colours";
 import LazyLoad from "react-lazy-load";
 
-//c47302bd1e471b3115d244ea7c372defeb71c390
 const Loading = () => (
   <div style={{height:"350px", display: "flex", alignItems: "center", justifyContent: "center"}}>
       <CircularProgress/>
@@ -24,16 +23,12 @@ export default function Items() {
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
   
-  const hello = ()=>
-  {
-      console.log("hello");
-  }
-
 useEffect(() => {
     (async()=>{
         let itemData;
         try{
           let token = localStorage.getItem('itemName')
+          console.log(token);
             let response = await fetch(
                         "https://rats-hackathon.herokuapp.com/main/item/",
                         {
@@ -69,7 +64,7 @@ useEffect(() => {
           marginleft={0}
           marginright={10}
         >
-          {card.map((card) => {
+          {card.map((card,index) => {
             return (
               
               <Grid item xs={12} sm={6} md={4} lg={3} key={card.item_id}>
