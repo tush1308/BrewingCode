@@ -52,7 +52,9 @@ class Order(models.Model):
     def __str__(self):
         return str(self.payment_method)
 
-
+    # def calc_total(self):
+    #     k=
+    #     self.total_bill=
 
 
 
