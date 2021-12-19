@@ -19,7 +19,6 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
   const [bName, setBName] = useState("");
   const [bLocation, setBLocation] = useState("");
   const [isLoading, setLoading] = useState(true);
