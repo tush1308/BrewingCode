@@ -7,7 +7,7 @@ class ItemTypeModelAdmin(admin.ModelAdmin):
 
 @admin.register(Item)
 class ItemTypeModelAdmin(admin.ModelAdmin):
-    list_display=['item_id','item_name','item_brand','item_price','available_quantity','owned_by','created_at']
+    list_display=['item_id','item_name','item_brand','item_price','owned_by','created_at']
 
 @admin.register(Order)
 class ItemTypeModelAdmin(admin.ModelAdmin):

@@ -29,6 +29,7 @@ class MyUserDetail(generics.RetrieveUpdateAPIView):
     serializer_class = MyUserSerializer
     permission_classes=IsAuthenticated
  
+ 
 
 class Registration(generics.CreateAPIView):
     serializer_class=RegistrationSerializer
@@ -39,7 +40,7 @@ class Registration(generics.CreateAPIView):
             if serializer.is_valid():
                 my_user = serializer.save()
                 token = Token.objects.get(user = my_user).key
-                current_site = 'https://rats-hackathon.herokuapp.com'
+                current_site = 'http://127.0.0.1:8000'
                 relative_link = reverse('verifyEmail')          
                 absurl = current_site + relative_link + "?token="+str(token) #to integrate with frontend   
                 email_body = 'Hi' + my_user.first_name + 'Use link below to verify your email \n' + absurl  
@@ -52,7 +53,7 @@ class Registration(generics.CreateAPIView):
 
 @api_view(['GET'])
 @permission_classes(())
-def verifyEmail(request): #what to do if user clicks on link again as now the token has been reset, put a quick fix by try and except
+def verifyEmail(request): 
     data = {}
     token = request.GET.get('token')
     try:
