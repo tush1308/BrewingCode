@@ -13,12 +13,17 @@ import { Link } from "react-router-dom";
 import "./Items.css";
 import { BLUE2, BLACK } from "../../styles/colours";
 import ItemDetails from "../ItemDetails/ItemDetails";
+import { HelpOutline } from "@mui/icons-material";
 //c47302bd1e471b3115d244ea7c372defeb71c390
+
 export default function Items() {
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
   
-
+  const hello = ()=>
+  {
+      console.log("hello");
+  }
 
 useEffect(() => {
     (async()=>{
@@ -30,7 +35,7 @@ useEffect(() => {
                           method: "GET",
                           headers: {
                             "Content-Type": "application/json",
-                            Authorization: "token c47302bd1e471b3115d244ea7c372defeb71c390",
+                            Authorization: "token fc04e454ab2303812aabaeb0d6d417b9b4297243",
                             Accept: "application/json",
                           },
                         }
@@ -46,7 +51,6 @@ useEffect(() => {
                 }
                 setCard(itemData);
     })();
-    //  getCard();
   }, []);
   return (
     <>
@@ -63,21 +67,21 @@ useEffect(() => {
           {card.map((card) => {
             return (
               <Grid item xs={12} sm={6} md={4} lg={3} key={card.item_id}>
-                  <CardActionArea onClick={()=>{<ItemDetails/>}}>
-                      <Link className="link" to={{ pathname: "/home/items/" + card.item_name + "/" + card.item_id}}>
+                <Link className="link" to={{ pathname: "/Home/Items/" + card.item_id}}>
+                  <CardActionArea>
+                  
                 <Card
                   sx={{ maxWidth: 345 }}
                   style={{
-                    height: "300px",
+                    height: "280px",
                     borderRadius: "10px",
                     backgroundColor: "#90B8F8",
                   }}
                 >
-                  
                     <CardMedia
                       component="img"
                       height="180"
-                      image="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                      image={card.item_image}
                       className="item-image"
                     />
                     <CardContent>
@@ -120,8 +124,10 @@ useEffect(() => {
                     </CardContent>
                   
                 </Card>
-                </Link>
+              
                 </CardActionArea>
+                </Link>
+        
               </Grid>
             );
           })}
