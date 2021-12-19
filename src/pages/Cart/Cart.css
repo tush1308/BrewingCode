@@ -11,6 +11,7 @@
   width: 80%;
   height: 100vh;
   margin: auto;
+  background-color: #5f85db;
 }
 
 .items-info {
@@ -59,6 +60,10 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.add-minus-quantity .number{
+  background-color: black;
 }
 
 .add-minus-quantity button {

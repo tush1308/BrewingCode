@@ -24,7 +24,7 @@ const Cart = () => {
           <span
             className="fas fa-minus minus" /*onClick={() => decrement(id)}*/
           ><RemoveIcon/></span>
-          <input type="text" placeholder="7" disabled />
+          <input className="number" type="text" placeholder="7" disabled />
           <span className="fas fa-plus add" /*onClick={() => increment(id)}*/><AddIcon/></span>
         </div>
 
