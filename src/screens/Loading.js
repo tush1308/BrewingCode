@@ -17,7 +17,7 @@ export default function Loading({navigation,route}){
           console.log(e);
         }finally{
             setLoading(false);
-            console.log("Done and loading is true");
+            // console.log("Done");
         }
     }
 

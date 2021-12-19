@@ -1,28 +1,25 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import {View,Text,StyleSheet, Alert,Image,Button} from 'react-native';
+import {View,Text,StyleSheet, Alert,Image,Button, ActivityIndicator} from 'react-native';
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { buttonColor,buttonTextColor,bgColor, } from '../config/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const url="https://rats-hackathon.herokuapp.com/main/item/";
-
+import { URL } from "../utils/api";
 export default function Home({navigation}){
   const [data,setData]=useState([]);
   const [loading,setLoading]=useState(true);
   const [token,setToken]= useState("");
-
+  const [tloading,setTloading]=useState(true);  //for fetching item type details
+  const [types,setTypes]=useState([]);
   const getToken = async () => {
     try {
-      const value = await AsyncStorage.getItem('userid');
-      const tobj= await AsyncStorage.getItem(value);
-      console.log(tobj);
-      const tob=JSON.parse(tobj);
-      console.log(tob.token);
-      if(tob.token){
-        setToken(tob.token);
-        getData(tob.token);
-      }
+      const value = await AsyncStorage.getItem('token');
+      setToken(value);
+      getData(value);
+      getTypes(value);
+    console.log(value);
     } catch(e) {
       console.log(e);
     }
@@ -36,7 +33,7 @@ export default function Home({navigation}){
                 headers: {'Authorization': 'token '+token},
             });
             const json= await result.json();
-            console.log(json);
+            // console.log(json);
             setData(json);
         }catch(error){
             console.log(error);
@@ -49,19 +46,45 @@ export default function Home({navigation}){
         }
 
     }
-  
+    
+    const getTypes=async(token)=>{
+        try{
+            const types=await fetch(URL+"main/item_type_detail/",{
+                method:'GET',
+                headers: {'Authorization': 'token '+token},
+            });
+            const type=await types.json();
+            console.log(type);
+            setTypes(type);
+        }catch(e){
+            console.log(error);
+        }finally{
+            setTloading(false);
+        }
+    }
 
     useEffect(() => {
-        // getData("token b1cc2b70b788c94b0ae044d3cdc4d9e0737a0eae");
         getToken();
-        
       }, []);
     return(
         <View style={styles.container}>
-            <Button onPress={()=>{getToken()}} title="Token"/>
-            {/* <Text style={{fontSize:30}}>{token}</Text> */}
+            <Button onPress={()=>{navigation.navigate('Logout')}} title="Logout"/>
+            <View style={styles.section2}>
+                {tloading?<ActivityIndicator/>:
+                <FlatList
+                    data={types}
+                    keyExtractor={({ id }, index) => id}
+                    numColumns={3}
+                    renderItem={({item,index})=>
+                    <View style={{margin:10}}>
+                        <Text>{item.item_category}</Text>
+                    </View>
+                    }
+                />
+                }
+            </View>
             <View style={styles.list}>
-                {loading?<Text>Wait</Text>:
+                {loading?<ActivityIndicator/>:
                     <FlatList
                       data={data}
                       keyExtractor={({ id }, index) => id}
@@ -85,7 +108,7 @@ export default function Home({navigation}){
                             </View>
                             <View style={styles.price}>
                                 <Text>Quantity: {item.available_quantity}</Text>
-                                <Text>Price: {item.item_price}</Text>
+                                <Text>Price:{item.item_price}</Text>
                             </View>
                         </View>
                         </TouchableOpacity>
@@ -102,7 +125,7 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     section2:{
-        flex:1,
+        flex:0.2,
     },
     list: {
       flex: 1,

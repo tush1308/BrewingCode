@@ -15,7 +15,7 @@ const App=()=> {
   const [user,setUser]=useState(false);
   const getToken = async () => {
     try {
-      const value = await AsyncStorage.getItem('userid')
+      const value = await AsyncStorage.getItem('token')
       console.log(value);
       if(value!=null){
         setUser(true);
@@ -33,13 +33,13 @@ const App=()=> {
 
   return (
     <NavigationContainer>
-      {user?<AppStack/>:
+      {/* {user?<AppStack/>: */}
       <Stack.Navigator initialRouteName='Login'>
       <Stack.Screen name='Login' component={Login} options={{headerShown:false}} />
       <Stack.Screen name='SignUp' component={SignUp} options={{headerShown:false}}/>
       <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
     </Stack.Navigator>
-    }
+    {/* } */}
     </NavigationContainer>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {View,Text,StyleSheet, Alert,Image} from 'react-native';
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { URL } from "../utils/api";
 export default function Detail({navigation,route}){
@@ -9,9 +9,12 @@ export default function Detail({navigation,route}){
     const id=info.id;
     // console.log(id);
     const token=info.token;
-    // console.log(token);
+    console.log(token);
     const [data,setData]=useState([]);
     const [loading,setLoading]=useState(true);
+    const [buy,setBuy]=useState(false);
+    const [quantity,setQuantity]=useState(0);
+
     const getDetails=async(id,token)=>{
         try{
             const result=await fetch(URL+"main/item_detail/"+id+"/",{
@@ -29,6 +32,25 @@ export default function Detail({navigation,route}){
             setLoading(false);
         }
     }
+    const postReq=async()=>{
+        try{
+            const response=await fetch(URL+"main/ordered_item/",{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token},
+            body:JSON.stringify({
+                "quantity":quantity,
+                "order_item":Number(id)
+            })
+            
+        });
+        const json=await response.json();
+        console.log(json);
+        }catch(error){
+            console.log(error);
+        }
+    }
     useEffect(() => {
         getDetails(id,token);
       }, []);
@@ -41,6 +63,19 @@ export default function Detail({navigation,route}){
                 <View style={styles.details}>
                     <Text style={{fontSize:30}}>{data.item_name}  </Text>
                     <Text style={{fontSize:25}}>{data.item_brand}</Text>
+                </View>
+                <View style={styles.details}>
+                    <Text style={{fontSize:20}}>Rs. {data.item_price}</Text>
+                </View>
+                <View style={{flexDirection:'row',backgroundColor:'yellow',alignItems:'center'}}>
+                    <Text>Enter the quantity: </Text>
+                    <TextInput style={styles.textInput}
+                        onChangeText={(text)=>{setQuantity(text);
+                        console.log(text);}}
+                    />
+                    <TouchableOpacity onPress={()=>{postReq()}}>
+                        <Text style={{fontSize:20}}>Buy</Text>
+                </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -76,5 +111,16 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         padding:10,
-    }
+    },
+    textInput:{
+        width:50,
+        // height:20,
+        top:5.5,
+        backgroundColor:'#FFFFFF',
+        fontSize:15,
+        paddingTop:8.7,
+        marginBottom:14,
+        marginRight:10,
+        color:'black',
+    },
   });

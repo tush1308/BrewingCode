@@ -11,18 +11,16 @@ import AppStack from '../navigation/AppStack';
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading,setLoading]=useState(true);
     const [verified,setVerified]=useState(false);
-    const verifyToken = async (token,id) => {
+    const storeToken = async (token,id) => {
         try {
-          const tobj= await AsyncStorage.getItem(id.toString());
-          console.log(tobj);
-          const tob=JSON.parse(tobj);
-          // console.log(tob.token);
-          if(token==tob.token){
-            await AsyncStorage.setItem('userid',id.toString());
-            setVerified(true);
-          }
+            if(token){
+              // console.log(id.toString());
+              // console.log(token);
+              await AsyncStorage.setItem('token',token);
+              await AsyncStorage.setItem('userid',id.toString());
+              setVerified(true);
+            }
         } catch (e) {
           console.log(e);
         }
@@ -45,7 +43,7 @@ export default function Login({ navigation }) {
           const json= await result.json();
           console.log(json);
           // setToken(json.token);
-          verifyToken(json.token,json.user_id)
+          storeToken(json.token,json.user_id)
         }catch(error){
           console.log("Error: "+error);
         }
@@ -53,47 +51,49 @@ export default function Login({ navigation }) {
 
     return (
       <View style={styles.container}>
-          {verified?<AppStack/>:<View style={styles.form}>
-            <Text style={styles.message}>Welcome Back</Text>
-            <View style={{ alignItems: 'center' }}>
-              <Input
-                placeholder='Username'
-                name='email'
-                id='email'
-                value={email}
-                onChangeText={(text) => { setEmail(text) }}
-                placeholderTextColor='#393E46'
-              />
-  
-              <PassInput
-                placeholder='Password'
-                name='password'
-                id='password'
-                value={password}
-                onChangeText={(text) => { setPassword(text) }}
-                placeholderTextColor='#393E46'
-              />
-            </View>
-            <View 
-            style={{ marginTop: 12, marginLeft: wp('2%') }}
-            >
-              <TouchableOpacity onPress={() => { }}>
-                <Text style={{ color: '#ACACAC', textDecorationLine: 'underline' }}>Forgot your password?</Text>
-              </TouchableOpacity>
-            </View>
-  
-            <View style={{marginLeft:5}}>
-              <TouchableOpacity style={styles.button}
-                onPress={()=>{SignIn()}}
-                >
-                <Text style={{color:buttonTextColor}}>Login</Text>
-              </TouchableOpacity>
-            </View>
-  
-            <TouchableOpacity style={{marginTop:10}} onPress={()=>{navigation.navigate('SignUp')}}>
-                <Text style={{color: '#ACACAC', textDecorationLine: 'underline',alignSelf:'center' }}>Don't have an account? Sign Up</Text>
-              </TouchableOpacity>
-          </View>}
+          {verified?<AppStack/>:
+          <View style={styles.form}>
+          <Text style={styles.message}>Welcome Back</Text>
+          <View style={{ alignItems: 'center' }}>
+            <Input
+              placeholder='Username'
+              name='email'
+              id='email'
+              value={email}
+              onChangeText={(text) => { setEmail(text) }}
+              placeholderTextColor='#393E46'
+            />
+
+            <PassInput
+              placeholder='Password'
+              name='password'
+              id='password'
+              value={password}
+              onChangeText={(text) => { setPassword(text) }}
+              placeholderTextColor='#393E46'
+            />
+          </View>
+          <View 
+          style={{ marginTop: 12, marginLeft: wp('2%') }}
+          >
+            <TouchableOpacity onPress={() => { }}>
+              <Text style={{ color: '#ACACAC', textDecorationLine: 'underline' }}>Forgot your password?</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{marginLeft:5}}>
+            <TouchableOpacity style={styles.button}
+              onPress={()=>{SignIn()}}
+              >
+              <Text style={{color:buttonTextColor}}>Login</Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity style={{marginTop:10}} onPress={()=>{navigation.navigate('SignUp')}}>
+              <Text style={{color: '#ACACAC', textDecorationLine: 'underline',alignSelf:'center' }}>Don't have an account? Sign Up</Text>
+            </TouchableOpacity>
+        </View>
+          }
       </View>
     )
   }
