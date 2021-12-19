@@ -39,11 +39,7 @@ class OrderItem(models.Model):
     def save(self,*args,**kwargs):
         if self.quantity>self.order_item.available_quantity :
             raise ValueError("Item not available")
-        else:
-            self.order_item.available_quantity=self.order_item.available_quantity-self.quantity
-            self.price=self.order_item.item_price
-            self.total_price=self.price*self.quantity
-            super(OrderItem,self).save(*args,**kwargs)
+        super(OrderItem,self).save(*args,**kwargs)
 
 
 class Order(models.Model):
