@@ -43,7 +43,7 @@ export default function SignInSide() {
         {
           method: "POST",
           body: JSON.stringify({
-            username: email,
+            email: email,
             password: password,
           }),
           headers: {
@@ -74,7 +74,7 @@ export default function SignInSide() {
             backgroundImage: login,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
-              t.palette.mode === "dark"
+              t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
             backgroundSize: "cover",
