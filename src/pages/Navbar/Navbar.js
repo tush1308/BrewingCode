@@ -40,6 +40,7 @@ const Navbar = () => {
     <AppBar style={{
         backgroundColor: "#252C33",
         color: "#dbdbdb",
+        transform: "translateY(-12px)",
       }} position="sticky" >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -51,7 +52,7 @@ const Navbar = () => {
           >
             <img
               src={logo}
-              style={{ width: "100%", height: "9vh" }}
+              style={{ width: "100%", height: "12vh" }}
               alt="logo"
             />
           </Typography>
