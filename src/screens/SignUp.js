@@ -11,6 +11,7 @@ import { TextInput } from 'react-native-gesture-handler';
 const BASE_URL="https://rats-hackathon.herokuapp.com/login-signup"
 
 export default function SignUp({ navigation }) {
+  // const [token,setToken]=useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fname,setFname]=useState("");
@@ -36,10 +37,16 @@ export default function SignUp({ navigation }) {
       });
       const json= await result.json();
       console.log(json);
+      if(json.response=="Successfully registered a new user"){
+        console.log(json.token);
+        navigation.navigate('Loading',{info:{
+          token:json.token,
+          email:json.email,
+          userId:json.user_id,
+        }});
+      }
     }catch(error){
       console.log("Error"+error);
-    }finally{
-        navigation.navigate('Home');
     }
   }
 
@@ -53,7 +60,7 @@ export default function SignUp({ navigation }) {
                     <TextInput style={styles.textInput}
                         placeholder='Fist Name'
                         name='fname'
-                        id='fname'
+                        // id='fname'
                         value={fname}
                         onChangeText={(text)=>{setFname(text)}}
                         placeholderTextColor='#393E46'
@@ -66,7 +73,7 @@ export default function SignUp({ navigation }) {
                     <TextInput style={styles.textInput}
                         placeholder='Last Name'
                         name='lname'
-                        id='lname'
+                        // id='lname'
                         value={lname}
                         onChangeText={(text)=>{setLname(text)}}
                         placeholderTextColor='#393E46'

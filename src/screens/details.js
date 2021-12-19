@@ -19,7 +19,7 @@ export default function Detail({navigation,route}){
                 headers: {'Authorization': token},
             });
             const json= await result.json();
-            // console.log(json);
+            console.log(json);
             setData(json);
         }catch(error){
             console.log(error);

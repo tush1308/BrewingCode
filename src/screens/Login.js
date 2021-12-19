@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
-import { Text, StyleSheet, View, ImageBackground, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, ImageBackground, TouchableOpacity, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Input from '../components/input';
 import PassInput from '../components/passInput';
 import { buttonColor,buttonTextColor,bgColor, } from '../config/color';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from '../utils/api';
+import AppStack from '../navigation/AppStack';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [token,setToken]=useState("");
-    const storeToken = async (token) => {
+    const [loading,setLoading]=useState(true);
+    const [verified,setVerified]=useState(false);
+    const verifyToken = async (token,id) => {
         try {
-          await AsyncStorage.setItem('token', token)
+          const tobj= await AsyncStorage.getItem(id.toString());
+          console.log(tobj);
+          const tob=JSON.parse(tobj);
+          // console.log(tob.token);
+          if(token==tob.token){
+            await AsyncStorage.setItem('userid',id.toString());
+            setVerified(true);
+          }
         } catch (e) {
           console.log(e);
-        }finally{
-            navigation.navigate('Home');
         }
       }
 
@@ -31,24 +38,22 @@ export default function Login({ navigation }) {
               'Accept':'application/json'
             },
             body: JSON.stringify({
-              "username": email,
+              "email": email,
               "password": password,
             }),
           });
           const json= await result.json();
           console.log(json);
-          setToken(json.token);
+          // setToken(json.token);
+          verifyToken(json.token,json.user_id)
         }catch(error){
           console.log("Error: "+error);
-        }finally{
-            storeToken(token);
-            // navigation.navigate('Home');
         }
       }
 
     return (
       <View style={styles.container}>
-          <View style={styles.form}>
+          {verified?<AppStack/>:<View style={styles.form}>
             <Text style={styles.message}>Welcome Back</Text>
             <View style={{ alignItems: 'center' }}>
               <Input
@@ -88,7 +93,7 @@ export default function Login({ navigation }) {
             <TouchableOpacity style={{marginTop:10}} onPress={()=>{navigation.navigate('SignUp')}}>
                 <Text style={{color: '#ACACAC', textDecorationLine: 'underline',alignSelf:'center' }}>Don't have an account? Sign Up</Text>
               </TouchableOpacity>
-          </View>
+          </View>}
       </View>
     )
   }

@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import {View,Text,StyleSheet, Alert,Image} from 'react-native';
+import {View,Text,StyleSheet, Alert,Image,Button} from 'react-native';
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { buttonColor,buttonTextColor,bgColor, } from '../config/color';
@@ -14,12 +14,14 @@ export default function Home({navigation}){
 
   const getToken = async () => {
     try {
-      const value = await AsyncStorage.getItem('token');
-      if(value !== null) {
-        setToken('token '+value);
-        // console.log(value);
-        setLoading(false);
-        getData('token '+value);
+      const value = await AsyncStorage.getItem('userid');
+      const tobj= await AsyncStorage.getItem(value);
+      console.log(tobj);
+      const tob=JSON.parse(tobj);
+      console.log(tob.token);
+      if(tob.token){
+        setToken(tob.token);
+        getData(tob.token);
       }
     } catch(e) {
       console.log(e);
@@ -31,17 +33,18 @@ export default function Home({navigation}){
         try{
             const result=await fetch(url,{
                 method:'GET',
-                headers: {'Authorization': token},
+                headers: {'Authorization': 'token '+token},
             });
             const json= await result.json();
-            // console.log(json);
+            console.log(json);
             setData(json);
         }catch(error){
             console.log(error);
             // Alert.alert(error);
         }finally{
-            // console.log(data);
+            
             console.log("Done");
+            console.log(data);
             setLoading(false);
         }
 
@@ -49,12 +52,14 @@ export default function Home({navigation}){
   
 
     useEffect(() => {
-        // getData();
+        // getData("token b1cc2b70b788c94b0ae044d3cdc4d9e0737a0eae");
         getToken();
+        
       }, []);
     return(
         <View style={styles.container}>
-            <Text style={{fontSize:30}}>{token}</Text>
+            <Button onPress={()=>{getToken()}} title="Token"/>
+            {/* <Text style={{fontSize:30}}>{token}</Text> */}
             <View style={styles.list}>
                 {loading?<Text>Wait</Text>:
                     <FlatList
@@ -65,7 +70,7 @@ export default function Home({navigation}){
                         <TouchableOpacity onPress={()=>{
                             navigation.navigate('Detail',{info:{
                                 id:item.item_id,
-                                token:token,
+                                token:"token "+token,
                             }})
                             }}>
                         <View style={styles.card}>
@@ -75,8 +80,8 @@ export default function Home({navigation}){
                                 />
                             </View>
                             <View style={styles.details}>
-                                <Text style={{fontSize:18}}>{item.item_name}</Text>
-                                <Text style={{fontSize:18}}>{item.item_brand}</Text>
+                                <Text style={{fontSize:16}}>{item.item_name}</Text>
+                                <Text style={{fontSize:14}}>{item.item_brand}</Text>
                             </View>
                             <View style={styles.price}>
                                 <Text>Quantity: {item.available_quantity}</Text>
@@ -114,13 +119,13 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     image:{
-        height:wp('27%'),
-        width:wp('27%'),
+        height:wp('25%'),
+        width:wp('25%'),
         resizeMode:'stretch',
         borderRadius:15,
     },
     details:{
-        // backgroundColor:'orange',
+        backgroundColor:'orange',
         width:wp('25%'),
         justifyContent:'center',
         paddingLeft:5,
