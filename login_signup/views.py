@@ -1,5 +1,7 @@
+from django.http.response import HttpResponse
 from rest_framework.response import Response
 from django.shortcuts import redirect, render
+from rest_framework.views import APIView
 from rest_framework_swagger import renderers
 from .models import MyUser
 from .serializers import *
@@ -11,7 +13,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer,JSONRenderer
 from django.contrib.auth.models import update_last_login
 from rest_framework import status
-
+from django.urls import reverse
+from django.core.mail import send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from .utils import Util
 # Create your views here.
 class MyUserList(generics.ListAPIView):
     queryset=MyUser.objects.all()
@@ -30,18 +35,57 @@ class Registration(generics.CreateAPIView):
     def post(self,request,*args,**kwargs):
         if request.method == 'POST':
             serializer = RegistrationSerializer(data = request.data)
-            data = {}
+            data={}
             if serializer.is_valid():
                 my_user = serializer.save()
-                data['response']="Successfully registered a new user"
-                data['email']=my_user.email
-                data['user_id']=my_user.user_id
                 token = Token.objects.get(user = my_user).key
-                data['token']=token
+                current_site = 'http://127.0.0.1:8000'
+                relative_link = reverse('verifyEmail')          
+                absurl = current_site + relative_link + "?token="+str(token) #to integrate with frontend   
+                email_body = 'Hi' + my_user.first_name + 'Use link below to verify your email \n' + absurl  
+                data_email = {'email_body': email_body, 'to_email': my_user.email, 'email_subject':'Verify your email'}     
+                Util.send_email(data_email)           
             else:
                 data=serializer.errors
             return Response(data)
-            
+
+
+@api_view(['GET'])
+@permission_classes(())
+def verifyEmail(request): #what to do if user clicks on link again as now the token has been reset, put a quick fix by try and except
+    data = {}
+    token = request.GET.get('token')
+    try:
+        user = MyUser.objects.get(auth_token = token)
+    except:
+        content = {'detail': 'User already activated!'}
+        return Response(content, status = status.HTTP_200_OK)
+    token = request.GET.get('token')
+    data['response'] = "successfully registered a new user"
+    data['email'] = user.email
+    data['user_id']=user.user_id
+    if user.is_active == False:
+        user.is_active = True
+        user.save()
+        Token.objects.get(user = user).delete()
+        Token.objects.create(user = user)
+        new_token = Token.objects.get(user = user).key
+        data['new_token'] = new_token
+        return Response(data)
+    else:
+        data={'status':'Email Not Verified'}
+        return Response(data)
+
+
+
+
+
+
+
+
+
+
+
 class LoginView(generics.CreateAPIView):
     serializer_class=loginSerializer
     def post(self,request):
