@@ -22,10 +22,10 @@ function App() {
       <Route exact path="/"><Login/></Route>
       <Route exact path="/SignUp"><SignUp/></Route>
       <Route exact path="/Cart"><Cart/></Route>
-      <Route exact path="/Home"><Home/></Route>
+      
       <Route exact path="/Items"><Items/></Route>
-      <Route path="/Home/Items/:item_id" render={(props)=>{
-        return(<ItemDetails{...props}/>)
+      <Route exact path="/Home/Items/:item_id" render={(props)=>{
+        return( <ItemDetails {...props} /> )
       }}/>
       </Switch>
     </div>

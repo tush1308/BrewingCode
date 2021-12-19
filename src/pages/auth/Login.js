@@ -35,12 +35,10 @@ export default function SignInSide() {
     createacc();
   };
 
- const saveToken= (value)=>
-  {
-    
-    localStorage.setItem('itemName', value)
-      localStorage.getItem('itemName')
-      console.log(value)
+  const saveToken = (value) => {
+    localStorage.setItem("itemName", value);
+    localStorage.getItem("itemName");
+    console.log(value);
   };
   async function createacc() {
     console.log("hello");

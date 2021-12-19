@@ -1,56 +1,77 @@
-import { Box, Card, Paper } from "@mui/material";
+import {
+  Card,
+  Box,
+  Typography,
+  CardMedia,
+  CircularProgress,
+  CardContent
+} from "@mui/material";
 import { useEffect, useState } from "react";
-export default function ItemDetails(props)
-{
+
+import './ItemDetails.css'
+export default function ItemDetails(props) {
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
-    (async()=>{
-      console.log(props.match.params.item_id)
-        let itemData;
-        try{
-            let response = await fetch(
-              "https://rats-hackathon.herokuapp.com/main/item_detail/4/",
-                        {
-                          method: "GET",
-                          headers: {
-                            
-                            Authorization: "token 362a2b4e67b29124b3141ed2d8cc063f9fa5f376"
-                            
-                          },
-                        }
-                      );
-                      itemData = (await response.json());
-                      console.log(itemData);
-        }
-        catch (error) {
-                  console.log("Error" + error);
-                  itemData=[];
-                } finally {
-                  setLoading(false);
-                }
-                setCard(itemData);
+    (async () => {
+      // console.log(props.match.params.item_id)
+      let itemData;
+      try {
+        let token = localStorage.getItem("itemName");
+        let id = props.match.params.item_id;
+        let response = await fetch(
+          `https://rats-hackathon.herokuapp.com/main/item_detail/${id}/`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `token ${token}`,
+            },
+          }
+        );
+        itemData = await response.json();
+        console.log(itemData);
+        
+      } catch (error) {
+        console.log("Error" + error);
+        itemData = [];
+      } finally {
+        setLoading(false);
+        
+      }
+      setCard(itemData);
     })();
   }, []);
-    return(<>
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > :not(style)': {
-          m: 1,
-          width: 500,
-          height: 500,
-        },
-      }}
-    >
+  return (
+    <div className="container">
+       <Card sx={{ display: 'flex', marginTop: '20px', marginLeft: '50px', marginRight: '50px'}} className="card-body">
+        <div className="section">
+        <CardContent className="card-content">
+          <Typography component="div" variant="h4">
+           {card.item_name}
+           {/* hvvsdc */}
+          </Typography>
+          <Typography variant="h5"  component="div">
+            {card.item_brand}
+            {/* wdcfv */}
+          </Typography>
+        </CardContent>
+        <div className="card-details">
+        <Typography variant="h6"  component="div" color={"#353941"}>
+            Price: {card.item_price}
+            {/* sdvvd */}
+          </Typography>
+          
+        </div>
+        </div>
+        <CardMedia
+        component="img"
+        sx={{ width: 151 }}
+        image="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+        alt="Live from space album cover"
+        className="card-image"
+      />
       
-    <Paper elevation={3}>
-    <div className="item-image">
-        {card.item_image}
+    </Card>
     </div>
-    </Paper>
-    
-    </Box>
-    </>);
+  );
 }

@@ -14,7 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");

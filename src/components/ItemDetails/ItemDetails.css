@@ -1,0 +1,15 @@
+.card-details{
+    display: flex !important;
+   flex-direction: column !important;
+   margin-left: 20px;
+    /* background-color: blueviolet !important; */
+}
+.section
+{
+display:flex;
+flex-direction: column;
+}
+.card-image{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
