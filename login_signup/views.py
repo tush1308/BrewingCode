@@ -39,7 +39,9 @@ class Registration(generics.CreateAPIView):
             data={}
             if serializer.is_valid():
                 my_user = serializer.save()
+                data={}
                 token = Token.objects.get(user = my_user).key
+                data['old_token']=token
                 current_site = 'https://rats-hackathon.herokuapp.com'
                 relative_link = reverse('verifyEmail')          
                 absurl = current_site + relative_link + "?token="+str(token) 
