@@ -41,7 +41,9 @@ class Registration(generics.CreateAPIView):
             else:
                 data=serializer.errors
             return Response(data)
+            
 class LoginView(generics.CreateAPIView):
+    serializer_class=loginSerializer
     def post(self,request):
         if request.method == 'POST':
             serializer = loginSerializer(data = request.data)

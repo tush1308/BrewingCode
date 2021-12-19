@@ -49,7 +49,7 @@ class OrderItem(models.Model):
 class Order(models.Model):
     order_id=models.AutoField(primary_key=True)
     user=models.ForeignKey(MyUser,on_delete=models.CASCADE)
-    ordered_items=models.ForeignKey(OrderItem,on_delete=models.CASCADE,default=1)
+    ordered_items=models.ForeignKey(OrderItem,on_delete=models.CASCADE)
     total_bill=models.IntegerField(null=True,blank=True)
     payment_method=models.CharField(max_length=100,choices=PAYMENT_METHOD)
     address=models.TextField()
