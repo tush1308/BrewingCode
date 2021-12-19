@@ -35,6 +35,13 @@ export default function SignInSide() {
     createacc();
   };
 
+ const saveToken= (value)=>
+  {
+    
+    localStorage.setItem('itemName', value)
+      localStorage.getItem('itemName')
+      console.log(value)
+  };
   async function createacc() {
     console.log("hello");
     try {
@@ -54,6 +61,7 @@ export default function SignInSide() {
       );
       result = await result.json();
       console.log(result);
+      saveToken(result.token);
     } catch (error) {
       console.log("Error" + error);
     } finally {

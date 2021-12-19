@@ -4,7 +4,7 @@ import {
   Grid,
   Card,
   Box,
-  Button,
+  CircularProgress,
   CardContent,
   CardMedia,
   Typography,
@@ -12,10 +12,14 @@ import {
 import { Link } from "react-router-dom";
 import "./Items.css";
 import { BLUE2, BLACK } from "../../styles/colours";
-import ItemDetails from "../ItemDetails/ItemDetails";
-import { HelpOutline } from "@mui/icons-material";
-//c47302bd1e471b3115d244ea7c372defeb71c390
+import LazyLoad from "react-lazy-load";
 
+//c47302bd1e471b3115d244ea7c372defeb71c390
+const Loading = () => (
+  <div style={{height:"350px", display: "flex", alignItems: "center", justifyContent: "center"}}>
+      <CircularProgress/>
+  </div>
+)
 export default function Items() {
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -29,13 +33,14 @@ useEffect(() => {
     (async()=>{
         let itemData;
         try{
+          let token = localStorage.getItem('itemName')
             let response = await fetch(
                         "https://rats-hackathon.herokuapp.com/main/item/",
                         {
                           method: "GET",
                           headers: {
                             "Content-Type": "application/json",
-                            Authorization: "token fc04e454ab2303812aabaeb0d6d417b9b4297243",
+                            Authorization: `token ${token}`,
                             Accept: "application/json",
                           },
                         }
@@ -65,8 +70,11 @@ useEffect(() => {
         >
           {card.map((card) => {
             return (
+              
               <Grid item xs={12} sm={6} md={4} lg={3} key={card.item_id}>
+                <LazyLoad placeholder={<Loading/>}>
                 <Link className="link" to={{ pathname: "/Home/Items/" + card.item_id}}>
+                
                   <CardActionArea>
                   
                 <Card
@@ -121,10 +129,11 @@ useEffect(() => {
                     </CardContent>
                   
                 </Card>
-              
+                
                 </CardActionArea>
+               
                 </Link>
-        
+                </LazyLoad>
               </Grid>
             );
           })}

@@ -20,11 +20,13 @@ function App() {
       <Navbar/>
     <Switch>
       <Route exact path="/"><Login/></Route>
-      <Route path="/SignUp"><SignUp/></Route>
-      <Route path="/Cart"><Cart/></Route>
-      <Route path="/Home"><Home/></Route>
-      <Route path="/Items"><Items/></Route>
-      <Route path="/Home/Items/:item_id"><ItemDetails/></Route>
+      <Route exact path="/SignUp"><SignUp/></Route>
+      <Route exact path="/Cart"><Cart/></Route>
+      <Route exact path="/Home"><Home/></Route>
+      <Route exact path="/Items"><Items/></Route>
+      <Route path="/Home/Items/:item_id" render={(props)=>{
+        return(<ItemDetails{...props}/>)
+      }}/>
       </Switch>
     </div>
     </Router>
