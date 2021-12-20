@@ -24,9 +24,8 @@ export default function SignUp(props) {
   const [bLocation, setBLocation] = useState("");
   const [isLoading, setLoading] = useState(true);
 
-  const history = useHistory();
-
-  const handleSubmit = (event) => {
+ const history = useHistory();
+ const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({

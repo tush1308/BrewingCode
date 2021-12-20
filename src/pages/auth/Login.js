@@ -24,6 +24,8 @@ export default function SignInSide() {
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(true);
 
+  const history = useHistory();
+
   const matches = useMediaQuery("(max-width:600px)");
   const history = useHistory();
 
@@ -81,10 +83,11 @@ export default function SignInSide() {
         console.log("hello");
         history.push("/Items");
       } }catch (error) {
-      console.log("Error" + error);
-    } finally {
+        console.log("Error" + error);
       setLoading(false);
-    }
+     }// finally {
+    //   setLoading(false);
+    // }
   }
 
   return (
