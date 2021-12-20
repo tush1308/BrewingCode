@@ -4,7 +4,6 @@ import SignUp from './pages/auth/SignUp';
 import Cart from './pages/Cart/Cart';
 import Items from './components/Items/Items';
 import ItemDetails from './components/ItemDetails/ItemDetails';
-import Home from './pages/Home/Home'
 
 import {
   BrowserRouter as Router,
@@ -23,7 +22,6 @@ function App() {
       <Route exact path="/"><Login/></Route>
       <Route exact path="/SignUp"><SignUp/></Route>
       <Route exact path="/Cart"><Cart/></Route>
-      
       <Route exact path="/Items"><Items/></Route>
       <Route exact path="/Home/Items/:item_id" render={(props)=>{
         return( <ItemDetails {...props} /> )

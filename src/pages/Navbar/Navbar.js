@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../assets/logo.webp";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router-dom";
 
 const pages = ["Products"];
 const settings = ["Profile", "Logout"];
@@ -37,10 +38,13 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar style={{
+    <AppBar
+      style={{
         backgroundColor: "#252C33",
         color: "#dbdbdb",
-      }} position="sticky" >
+      }}
+      position="sticky"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -112,10 +116,15 @@ const Navbar = () => {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <ShoppingCartIcon sx={{ fontSize: 30, p: 0, marginRight:1 }} />
+            <Link to="/Cart">
+              <ShoppingCartIcon
+                sx={{ fontSize: 30, marginRight: 5, paddingTop: 2 }}
+                style={{ color: "white" }}
+              />
+            </Link>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Sharp" src="" />
               </IconButton>
             </Tooltip>
             <Menu

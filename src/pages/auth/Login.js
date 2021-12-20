@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import login from "../../assets/login.jpg";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import  { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -65,15 +65,13 @@ export default function SignInSide() {
       saveToken(result.token);
       if (result.token) {
         console.log("hello");
-        alert("Loged in sucessfully")
-        if(result.old_token){
-          history.push("/Items");
-        }
+        history.push("/Items");
       }
     } catch (error) {
       console.log("Error" + error);
+      alert("Please enter valid credentials");
       setLoading(false);
-     }// finally {
+    } // finally {
     //   setLoading(false);
     // }
   }

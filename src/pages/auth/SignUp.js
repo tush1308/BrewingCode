@@ -61,9 +61,8 @@ export default function SignUp(props) {
       result = await result.json();
       console.log(result);
       if(result.old_token){
-        alert("Signed in Successfully");
+        alert("Signed in Successfully! Please verify your email");
         history.push("/");
-
       }
     } catch (error) {
       console.log("Error" + error);

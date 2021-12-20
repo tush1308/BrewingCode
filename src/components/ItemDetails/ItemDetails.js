@@ -9,15 +9,14 @@ import {
 
 import { useEffect, useState } from "react";
 import './ItemDetails.css'
-  
+
+
 export default function ItemDetails(props)
 {
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
-
   const [quantity, setQuantity] = useState("");
   const [orderItem, setOrderitem] = useState("");
-  
   
   useEffect(() => {
     (async () => {
@@ -133,9 +132,11 @@ export default function ItemDetails(props)
                   />
         </div>
         <div className="request-btn">
+          {/* <Link to="/Cart"> */}
         <Button className="btn" variant="outlined" onClick={handleSubmit}>
         Request
         </Button>
+        {/* </Link> */}
         </div>
         </div>
     </Card>
