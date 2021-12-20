@@ -13,7 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import "./Items.css";
 import ItemType from "../ItemType/ItemType";
-import LazyLoad from "react-lazy-load";
+import LazyLoad from "react-lazyload"
 
 const Loading = () => (
   <div style={{height:"350px", display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -23,7 +23,7 @@ const Loading = () => (
 export default function Items() {
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [currentCard, setcurrentCard] = useState(1);
+  const [currentcard, setcurrentCard] = useState(1);
 useEffect(() => {
     (async()=>{
         let itemData;
@@ -61,7 +61,7 @@ useEffect(() => {
   return (
     <>
     {/* <ItemType/> */}
-    <Pagination count={5} currentCard={currentCard} onChange={handleChange} variant="outlined" className="pagi" color="primary"/>
+    <Pagination count={5} currentcard={currentcard} onChange={handleChange} variant="outlined" className="pagi" color="primary"/>
         <Box ml={5} mr={5} pl={5} pr={5 } mt={2} pt={2} mb={1} pb={1}> 
         <Grid
           container
@@ -71,7 +71,7 @@ useEffect(() => {
           marginleft={0}
           marginright={10}
         >
-          {card.slice((currentCard-1)*4,currentCard*4).map((card,index) => {
+          {card.slice((currentcard-1)*4,currentcard*4).map((card,index) => {
             return (
               
               <Grid item xs={12} sm={6} md={4} lg={3} key={card.item_id}>

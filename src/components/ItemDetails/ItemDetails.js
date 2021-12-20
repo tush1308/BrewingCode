@@ -4,6 +4,7 @@ import {
   CardMedia,
   CardContent,
   Button,
+  Grid,
   TextField
 } from "@mui/material";
 
@@ -121,6 +122,7 @@ export default function ItemDetails(props)
       />
         <div className="order">
           <div className="input-field">
+          <Grid item xs={12} sm={6}>
           <TextField
                     required
                     fullWidth
@@ -128,15 +130,19 @@ export default function ItemDetails(props)
                     label="quantity"
                     type="text"
                     id="quantity"
+                    className="quantity"
                     autoComplete="new-quantity"
                     value={quantity.trim()}
                     onChange={(e) => setQuantity(e.target.value)}
                     style={{ backgroundColor: "white" }}
                   />
+                  </Grid>
         </div>
         <div className="request-btn">
           {/* <Link to="/Cart"> */}
-        <Button className="btn" variant="outlined" onClick={handleSubmit}>
+        <Button className="btn" type="submit"
+                fullWidth
+                sx={{ mt: 3, mb: 2 }} variant="outlined" onClick={handleSubmit}>
         Request
         </Button>
         {/* </Link> */}
