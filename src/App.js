@@ -1,7 +1,6 @@
 import './App.css';
 import Login from '../src/pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
-import Cart from './pages/Cart/Cart';
 import Items from './components/Items/Items';
 import ItemDetails from './components/ItemDetails/ItemDetails';
 
@@ -23,7 +22,7 @@ function App() {
       <Route exact path="/SignUp"><SignUp/></Route>
       <Route exact path="/Cart"><Cart/></Route>
       <Route exact path="/Items"><Items/></Route>
-      <Route exact path="/Home/Items/:item_id" render={(props)=>{
+      <Route exact path="/Items/:item_id" render={(props)=>{
         return( <ItemDetails {...props} /> )
       }}/>
       </Switch>

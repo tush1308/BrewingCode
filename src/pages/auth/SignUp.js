@@ -25,8 +25,7 @@ export default function SignUp(props) {
   const [isLoading, setLoading] = useState(true);
 
  const history = useHistory();
-
-  const handleSubmit = (event) => {
+ const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -71,6 +70,7 @@ export default function SignUp(props) {
     //   setLoading(false);
     // }
   }
+   
 
   
 

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./Items.css";
-import { BLUE2, BLACK } from "../../styles/colours";
+import ItemType from "../ItemType/ItemType";
 import LazyLoad from "react-lazy-load";
 
 const Loading = () => (
@@ -54,6 +54,7 @@ useEffect(() => {
   }, []);
   return (
     <>
+    <ItemType/>
         <Box ml={5} mr={5} pl={5} pr={5 } mt={2} pt={2} mb={1} pb={1}> 
         <Grid
           container
@@ -68,7 +69,7 @@ useEffect(() => {
               
               <Grid item xs={12} sm={6} md={4} lg={3} key={card.item_id}>
                 <LazyLoad placeholder={<Loading/>}>
-                <Link className="link" to={{ pathname: "/Home/Items/" + card.item_id}}>
+                <Link className="link" to={{ pathname: "/Items/" + card.item_id}}>
                 
                   <CardActionArea>
                   

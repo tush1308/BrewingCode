@@ -53,6 +53,7 @@ export default function ItemDetails(props)
     event.preventDefault();
     console.log(quantity);
     console.log(orderItem);
+    
     createOrder();
   };
 
@@ -60,13 +61,15 @@ export default function ItemDetails(props)
     console.log("order");
     try {
       let token = localStorage.getItem("itemName");
+      let userId = localStorage.getItem("userId");
       let result = await fetch(
         "https://rats-hackathon.herokuapp.com/main/ordered_item/",
         {
           method: "POST",
           body: JSON.stringify({
             "quantity": quantity,
-            "order_item": Number(orderItem),
+            "cart_item": Number(orderItem),
+            "created_by": Number(userId)
           }),
           headers: {
             "Content-Type": "application/json",
