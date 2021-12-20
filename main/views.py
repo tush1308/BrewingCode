@@ -6,22 +6,22 @@ from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 # Create your views here.
-class ItemTypeView(generics.ListAPIView):
+class ItemTypeView(generics.ListCreateAPIView):
     queryset=ItemType.objects.all()
     serializer_class=ItemTypeSerializer
     permission_classes=[IsAuthenticated]
 
-class ItemTypeView_detail(generics.RetrieveAPIView):
+class ItemTypeView_detail(generics.RetrieveUpdateDestroyAPIView):
     queryset=ItemType.objects.all()
     serializer_class=ItemTypeSerializer
     permission_classes=[IsAuthenticated]
 
-class ItemView(generics.ListAPIView):
+class ItemView(generics.ListCreateAPIView):
     queryset=Item.objects.all()
     serializer_class=ItemSerializer
     permission_classes=[IsAuthenticated]
 
-class ItemView_detail(generics.RetrieveAPIView):
+class ItemView_detail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Item.objects.all()
     serializer_class=ItemSerializer
     permission_classes=[IsAuthenticated]
@@ -32,7 +32,7 @@ class OrderView(generics.ListCreateAPIView):
     permission_classes=[IsAuthenticated]
 
 
-class OrderView_detail(generics.RetrieveUpdateAPIView):
+class OrderView_detail(generics.RetrieveUpdateDestroyAPIView):
     queryset=Order.objects.all()
     serializer_class=OrderSerializer
     permission_classes=[IsAuthenticated]
@@ -42,7 +42,7 @@ class OrderedItemView(generics.ListCreateAPIView):
     serializer_class=OrderItemSerializer
     permission_classes=[IsAuthenticated]
 
-class OrderedItemView_detail(generics.RetrieveUpdateAPIView):
+class OrderedItemView_detail(generics.RetrieveUpdateDestroyAPIView):
     queryset=OrderItem.objects.all()
     serializer_class=OrderItemSerializer
     permission_classes=[IsAuthenticated]    
