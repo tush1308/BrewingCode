@@ -17,23 +17,36 @@ flex-direction: column;
 {
     margin-left: 40px;
     margin-right: 40px;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
     border-radius: 4px;
     background-color: #5F85DB;
+    background: repeating-linear-gradient(
+  45deg,
+  #5F85DB,
+  #90B8F8 10px,
+  #7286fc 10px,
+  #465298 20px
+);
 }
 .order
 {
     margin-left: 15px;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
 }
 .request-btn
 {
     margin-top: 15px;
-    margin-left: 50px;
+    margin-left: 50px !important;
 }
 .btn{
     border-color: #353941 !important;
-    text-decoration:white !important;
+      color:white !important;
     background-color: #353941 !important;
+    
+}
+.quantity
+{
+    margin-right: 15px !important;
 }

@@ -4,7 +4,7 @@ import SignUp from './pages/auth/SignUp';
 import Items from './components/Items/Items';
 import ItemDetails from './components/ItemDetails/ItemDetails';
 import Cart from './pages/Cart/Cart';
-
+import Payment from './components/Payment/Payment';
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,6 +25,7 @@ function App() {
       <Route exact path="/Items/:item_id" render={(props)=>{
         return( <ItemDetails {...props} /> )
       }}/>
+      <Route exact path="/payment"><Payment/></Route>
       </Switch>
     </div>
     </Router>
