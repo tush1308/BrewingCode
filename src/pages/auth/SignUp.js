@@ -49,7 +49,8 @@ export default function SignUp(props) {
             password: password,
             business_name: bName,
             business_location: bLocation,
-            is_seller: false
+            is_seller: false,
+            business_pincode:"pin",
           }),
           headers: {
             "Content-Type": "application/json",
@@ -67,9 +68,7 @@ export default function SignUp(props) {
     } catch (error) {
       console.log("Error" + error);
       setLoading(false);
-     }// finally {
-    //   setLoading(false);
-    // }
+     }
   }
    
 
