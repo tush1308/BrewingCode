@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import login from "../../assets/login.jpg";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import  { Redirect } from 'react-router-dom'
+import  { useHistory } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -23,6 +23,8 @@ export default function SignInSide() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(true);
+
+  const history = useHistory();
 
   const matches = useMediaQuery("(max-width:600px)");
 
@@ -36,12 +38,10 @@ export default function SignInSide() {
     createacc();
   };
 
- const saveToken= (value)=>
-  {
-    
-    localStorage.setItem('itemName', value)
-      localStorage.getItem('itemName')
-      console.log(value)
+  const saveToken = (value) => {
+    localStorage.setItem("itemName", value);
+    localStorage.getItem("itemName");
+    console.log(value);
   };
   async function createacc() {
     console.log("hello");
@@ -63,21 +63,19 @@ export default function SignInSide() {
       result = await result.json();
       console.log(result);
       saveToken(result.token);
-      if(result.token){
-        console.log("hello")
-        return(<Redirect
-  to={{
-    pathname: "/Home",
-    // search: "?utm=your+face",
-    // state: { referrer: currentLocation }
-  }}
-/>)
+      if (result.token) {
+        console.log("hello");
+        alert("Loged in sucessfully")
+        if(result.old_token){
+          history.push("/Items");
+        }
       }
     } catch (error) {
       console.log("Error" + error);
-    } finally {
       setLoading(false);
-    }
+     }// finally {
+    //   setLoading(false);
+    // }
   }
 
   return (
