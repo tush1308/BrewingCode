@@ -7,9 +7,10 @@ export default function Detail({navigation,route}){
     
     const {info}=route.params;
     const id=info.id;
-    // console.log(id);
+    const uid=info.uid;
+    // console.log(uid);
     const token=info.token;
-    console.log(token);
+    // console.log(token);
     const [data,setData]=useState([]);
     const [loading,setLoading]=useState(true);
     const [buy,setBuy]=useState(false);
@@ -22,7 +23,7 @@ export default function Detail({navigation,route}){
                 headers: {'Authorization': token},
             });
             const json= await result.json();
-            console.log(json);
+            // console.log(json);
             setData(json);
         }catch(error){
             console.log(error);
@@ -41,7 +42,8 @@ export default function Detail({navigation,route}){
                 'Authorization': token},
             body:JSON.stringify({
                 "quantity":quantity,
-                "order_item":Number(id)
+                "cart_item":Number(id),
+                "created_by":Number(uid),
             })
             
         });

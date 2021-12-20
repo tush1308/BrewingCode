@@ -13,9 +13,12 @@ export default function Home({navigation}){
   const [token,setToken]= useState("");
   const [tloading,setTloading]=useState(true);  //for fetching item type details
   const [types,setTypes]=useState([]);
+  const [userId,setUserId]=useState("");
   const getToken = async () => {
     try {
       const value = await AsyncStorage.getItem('token');
+      const uid = await AsyncStorage.getItem('userid');
+      setUserId(uid);
       setToken(value);
       getData(value);
       getTypes(value);
@@ -41,7 +44,7 @@ export default function Home({navigation}){
         }finally{
             
             console.log("Done");
-            console.log(data);
+            // console.log(data);
             setLoading(false);
         }
 
@@ -76,9 +79,13 @@ export default function Home({navigation}){
                     keyExtractor={({ id }, index) => id}
                     numColumns={3}
                     renderItem={({item,index})=>
+                    <TouchableOpacity onPress={()=>{
+                        
+                        }}>
                     <View style={{margin:10}}>
                         <Text>{item.item_category}</Text>
                     </View>
+                    </TouchableOpacity>
                     }
                 />
                 }
@@ -94,6 +101,7 @@ export default function Home({navigation}){
                             navigation.navigate('Detail',{info:{
                                 id:item.item_id,
                                 token:"token "+token,
+                                uid:userId,
                             }})
                             }}>
                         <View style={styles.card}>

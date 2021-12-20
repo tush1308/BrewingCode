@@ -16,7 +16,7 @@ export default function SignUp({ navigation }) {
   const [password, setPassword] = useState("");
   const [fname,setFname]=useState("");
   const [lname,setLname]=useState("");
-
+  //{"old_token": "61ff307144e37f5fddbeb9d4d35d38000fa36933"}
   const Register=async()=>{
     console.log(BASE_URL+"/register/")
     try{
