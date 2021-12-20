@@ -21,13 +21,13 @@ from .utils import Util
 class MyUserList(generics.ListAPIView):
     queryset=MyUser.objects.all()
     serializer_class=MyUserSerializer
-    permission_classes=IsAuthenticated
+    permission_classes=[IsAuthenticated]
 
 
 class MyUserDetail(generics.RetrieveUpdateAPIView):
     queryset = MyUser.objects.all()
     serializer_class = MyUserSerializer
-    permission_classes=IsAuthenticated
+    permission_classes=[IsAuthenticated]
  
 
 
