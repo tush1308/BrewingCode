@@ -73,9 +73,7 @@ export default function SignUp(props) {
     } catch (error) {
       console.log("Error" + error);
       setLoading(false);
-     }// finally {
-    //   setLoading(false);
-    // }
+     }
   }
    
 
