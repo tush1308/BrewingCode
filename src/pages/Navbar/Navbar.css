@@ -1,0 +1,46 @@
+.navbar{
+    background: #26282B;
+    box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
+    display:flex; 
+     align-items: center;
+     justify-content: space-between;
+     padding-top: 0rem !important; 
+     padding-bottom: 0rem !important;
+     top: 0; 
+     z-index: 100;
+}
+.navbar-left{
+    display:flex;
+    align-items: center;
+    margin-left: 30px;
+}
+.brand-name{
+    font-family: Quintessential;
+font-style: normal;
+font-weight: normal;
+font-size: 30px;
+line-height: 77px;
+color: white;
+}
+.navbar-right{
+    display:flex;
+    align-items: right;
+    margin-right: 10px;
+    font-family: Poppins !important;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 37px;
+    /* margin-top: 0px !important;
+    padding-top: 0px !important; */
+    color: #5F85DB !important;
+}
+.navbar-right-element{
+    margin-right: 25px;
+    text-decoration: #5F85DB !important;
+}
+.icon{
+    margin-left: 30px !important;
+    margin-right: 15px; 
+    font-size: xx-large !important;
+ }

@@ -25,8 +25,7 @@ export default function SignUp(props) {
   const [isLoading, setLoading] = useState(true);
 
  const history = useHistory();
-
-  const handleSubmit = (event) => {
+ const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -61,9 +60,8 @@ export default function SignUp(props) {
       result = await result.json();
       console.log(result);
       if(result.old_token){
-        alert("Signed in Successfully");
+        alert("Signed in Successfully! Please verify your email");
         history.push("/");
-
       }
     } catch (error) {
       console.log("Error" + error);
@@ -72,6 +70,7 @@ export default function SignUp(props) {
     //   setLoading(false);
     // }
   }
+   
 
   
 

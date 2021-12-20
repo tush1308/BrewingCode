@@ -1,0 +1,26 @@
+.container{
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+.slick-prev:before, .slick-next:before {
+    color: black !important;
+}
+.item-category{
+    color:  #353941 !important;
+    align-items: center;
+}
+.item-container
+{
+  border-radius: 50px !important;
+  position: relative;
+  z-index: 2;
+  background-color: white;
+}
+.card-container
+{
+  margin: 5px;
+  border-radius: 60px !important;
+  background-color: #5F85DB !important;
+  height: 75px !important;
+  padding: 4px;
+}

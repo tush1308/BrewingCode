@@ -27,6 +27,7 @@ export default function SignInSide() {
   const history = useHistory();
 
   const matches = useMediaQuery("(max-width:600px)");
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,8 +42,21 @@ export default function SignInSide() {
   const saveToken = (value) => {
     localStorage.setItem("itemName", value);
     localStorage.getItem("itemName");
-    console.log(value);
+    
   };
+
+  const saveUsername = (value) => {
+    let matches = value.charAt(0);
+    localStorage.setItem("userName", matches);
+    localStorage.getItem("userName");
+    console.log(matches);
+  };
+  
+ const saveUserId = (value) => {
+  localStorage.setItem("userId", value);
+  localStorage.getItem("userId");
+}
+
   async function createacc() {
     console.log("hello");
     try {
@@ -63,15 +77,13 @@ export default function SignInSide() {
       result = await result.json();
       console.log(result);
       saveToken(result.token);
+      saveUsername(result.email);
+      saveUserId(result.user_id);
       if (result.token) {
         console.log("hello");
-        alert("Loged in sucessfully")
-        if(result.old_token){
-          history.push("/Items");
-        }
-      }
-    } catch (error) {
-      console.log("Error" + error);
+        history.push("/Items");
+      } }catch (error) {
+        console.log("Error" + error);
       setLoading(false);
      }// finally {
     //   setLoading(false);
