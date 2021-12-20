@@ -45,6 +45,7 @@ class MyUser(AbstractUser):
     username          = None
     business_name     = models.CharField(max_length=100)
     business_location = models.CharField(max_length=100)
+    is_seller         = models.BooleanField(default=False)
     created_at        = models.DateTimeField(auto_now_add=True)
     objects           = UserManager()  # used the above manager here
 

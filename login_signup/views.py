@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import logout
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_swagger.renderers import OpenAPIRenderer, SwaggerUIRenderer,JSONRenderer
-from django.contrib.auth.models import update_last_login
+from django.contrib.auth.models import Group, update_last_login
 from rest_framework import status
 from django.urls import reverse
 from django.core.mail import send_mail
@@ -39,7 +39,12 @@ class Registration(generics.CreateAPIView):
             data={}
             if serializer.is_valid():
                 my_user = serializer.save()
-                data={}
+                if my_user.is_seller==True:
+                    group=Group.objects.get(name='Seller')
+                    my_user.groups.add(group)
+                else:
+                    group=Group.objects.get(name='Buyer')
+                    my_user.groups.add(group)
                 token = Token.objects.get(user = my_user).key
                 data['old_token']=token
                 current_site = 'https://rats-hackathon.herokuapp.com'
@@ -67,6 +72,7 @@ def verifyEmail(request):
     data['response'] = "successfully registered a new user"
     data['email'] = user.email
     data['user_id']=user.user_id
+    data['is_seller']=str(user.is_seller)
     if user.is_active == False:
         user.is_active = True
         user.save()
@@ -93,4 +99,5 @@ class LoginView(generics.CreateAPIView):
             data['email'] = user.email
             data['token'] = token
             data['user_id']=user.user_id
+            data['is_seller']=str(user.is_seller)
             return Response(data, status = status.HTTP_200_OK)
