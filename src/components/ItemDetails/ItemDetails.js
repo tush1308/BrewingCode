@@ -3,7 +3,8 @@ import {
   Typography,
   CardMedia,
   CardContent,
-  Button
+  Button,
+  TextField
 } from "@mui/material";
 
 import { useEffect, useState } from "react";
@@ -14,6 +15,9 @@ export default function ItemDetails(props)
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
+  const [quantity, setQuantity] = useState("");
+  const [orderItem, setOrderitem] = useState("");
+  
   
   useEffect(() => {
     (async () => {
@@ -22,6 +26,7 @@ export default function ItemDetails(props)
       try {
         let token = localStorage.getItem("itemName");
         let id = props.match.params.item_id;
+        setOrderitem(id);
         let response = await fetch(
           `https://rats-hackathon.herokuapp.com/main/item_detail/${id}/`,
           {
@@ -44,6 +49,43 @@ export default function ItemDetails(props)
       setCard(itemData);
     })();
   }, []);
+   
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(quantity);
+    console.log(orderItem);
+    createOrder();
+  };
+
+  async function createOrder() {
+    console.log("order");
+    try {
+      let token = localStorage.getItem("itemName");
+      let result = await fetch(
+        "https://rats-hackathon.herokuapp.com/main/ordered_item/",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            "quantity": quantity,
+            "order_item": Number(orderItem),
+          }),
+          headers: {
+            "Content-Type": "application/json",
+           
+            "Authorization": `token ${token}`
+          },
+        }
+        
+      );
+      //console.log(token);
+      result = await result.json();
+      console.log(result);
+      
+    } catch (error) {
+      console.log("Error" + error);
+    }
+  }
+
   return (
     <div className="container">
       <div className="card-div">
@@ -77,11 +119,21 @@ export default function ItemDetails(props)
       />
         <div className="order">
           <div className="input-field">
-        <Typography>Enter Quantity: </Typography>
-        <input type="text" className="quantity" name="quantity"></input>
+          <TextField
+                    required
+                    fullWidth
+                    name="quantity"
+                    label="quantity"
+                    type="text"
+                    id="quantity"
+                    autoComplete="new-quantity"
+                    value={quantity.trim()}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    style={{ backgroundColor: "white" }}
+                  />
         </div>
         <div className="request-btn">
-        <Button className="btn" variant="outlined">
+        <Button className="btn" variant="outlined" onClick={handleSubmit}>
         Request
         </Button>
         </div>
