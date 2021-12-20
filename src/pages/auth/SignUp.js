@@ -15,7 +15,7 @@ import  { useHistory } from 'react-router-dom'
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
