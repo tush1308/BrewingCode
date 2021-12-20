@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import login from "../../assets/login.jpg";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import  { Redirect } from 'react-router-dom'
+import  { useHistory } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -25,6 +25,7 @@ export default function SignInSide() {
   const [isLoading, setLoading] = useState(true);
 
   const matches = useMediaQuery("(max-width:600px)");
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -76,17 +77,10 @@ export default function SignInSide() {
       saveToken(result.token);
       saveUsername(result.email);
       saveUserId(result.user_id);
-      if(result.token){
-        console.log("hello")
-        return(<Redirect
-  to={{
-    pathname: "/Home",
-    // search: "?utm=your+face",
-    // state: { referrer: currentLocation }
-  }}
-/>)
-      }
-    } catch (error) {
+      if (result.token) {
+        console.log("hello");
+        history.push("/Items");
+      } }catch (error) {
       console.log("Error" + error);
     } finally {
       setLoading(false);

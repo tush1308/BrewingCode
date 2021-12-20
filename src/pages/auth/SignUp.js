@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import  { Redirect } from 'react-router-dom'
+import  { useHistory } from 'react-router-dom'
 
 const theme = createTheme();
 
@@ -23,6 +23,8 @@ export default function SignUp(props) {
   const [bName, setBName] = useState("");
   const [bLocation, setBLocation] = useState("");
   const [isLoading, setLoading] = useState(true);
+
+  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,15 +61,17 @@ export default function SignUp(props) {
       result = await result.json();
       console.log(result);
       if(result.old_token){
-        console.log("hellojkk")
-        return <Redirect to="/" />
+        alert("Signed in Successfully! Please verify your email");
+        history.push("/");
       }
     } catch (error) {
       console.log("Error" + error);
-    } finally {
       setLoading(false);
-    }
+     }// finally {
+    //   setLoading(false);
+    // }
   }
+   
 
   
 
