@@ -100,4 +100,5 @@ class LoginView(generics.CreateAPIView):
             data['token'] = token
             data['user_id']=user.user_id
             data['is_seller']=str(user.is_seller)
+            data['business_pincode']=user.business_pincode
             return Response(data, status = status.HTTP_200_OK)

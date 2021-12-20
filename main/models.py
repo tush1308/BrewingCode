@@ -34,6 +34,8 @@ class OrderItem(models.Model):
     discount=models.DecimalField(max_digits=9, decimal_places=2,null=True,blank=True)
     total_price=models.DecimalField(max_digits=9, decimal_places=2,null=True,blank=True)
     created_by=models.ForeignKey(MyUser,on_delete=models.CASCADE)
+
+
     def __str__(self):
         return '%s %s' % (self.cart_item,self.quantity)
  #Calculating Discount
@@ -58,7 +60,6 @@ class OrderItem(models.Model):
 
 
 
-
 class Order(models.Model):
     order_id=models.AutoField(primary_key=True)
     user=models.ForeignKey(MyUser,on_delete=models.CASCADE)
@@ -72,7 +73,12 @@ class Order(models.Model):
         return str(self.payment_method)
 
 
-    
 
+class Final_Cart(models.Model):
+    final_cart_item=models.OneToOneField(OrderItem,on_delete=models.CASCADE)
+    pincode=models.CharField(max_length=6)
+    sold_to=models.OneToOneField(MyUser,on_delete=models.CASCADE,null=True,blank=True)
 
-
+    def save(self,*args,**kwargs):
+        self.sold_to=self.final_cart_item.created_by
+        super(Final_Cart,self).save(*args,**kwargs)

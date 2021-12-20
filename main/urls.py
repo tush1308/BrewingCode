@@ -9,5 +9,7 @@ urlpatterns = [
     path('order/',OrderView.as_view(),name='order'),
     path('order_detail/<int:pk>/',OrderView_detail.as_view(),name='order_detail'),
     path('ordered_item/',OrderedItemView.as_view(),name='ordered_item'),
-    path('ordered_item_detail/<int:pk>',OrderedItemView_detail.as_view(),name='ordered_item_detail')
+    path('ordered_item_detail/<int:pk>',OrderedItemView_detail.as_view(),name='ordered_item_detail'),
+    path('final_cart/',FinalCartView.as_view(),name='final-cart'),
+    path('final_cart_detail/<int:pk>/',FinalCartView_detail.as_view(),name='final-cart-detail')
 ]

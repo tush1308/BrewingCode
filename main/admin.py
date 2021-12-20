@@ -16,3 +16,7 @@ class ItemTypeModelAdmin(admin.ModelAdmin):
 @admin.register(OrderItem)
 class OrderItemModelAdmin(admin.ModelAdmin):
     list_display=['cart_item','price','quantity','total_price']
+
+@admin.register(Final_Cart)
+class FinalCartModelAdmin(admin.ModelAdmin):
+    list_display=['final_cart_item','pincode','sold_to']

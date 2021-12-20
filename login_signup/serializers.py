@@ -7,13 +7,13 @@ from django.contrib.auth import authenticate, login
 class MyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model  = MyUser
-        fields = ['user_id','email','first_name','last_name','business_name','business_location','is_seller']
+        fields = ['user_id','email','first_name','last_name','business_name','business_location','is_seller','business_pincode']
         
 
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model  = MyUser
-        fields = ['email','first_name','last_name','password','business_name','business_location','is_seller']
+        fields = ['email','first_name','last_name','password','business_name','business_location','is_seller','business_pincode']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -23,6 +23,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
             last_name         = validated_data['last_name'],
             business_name     = validated_data['business_name'],
             business_location = validated_data['business_location'],
+            business_pincode  = validated_data['business_pincode'],
             is_seller         = validated_data['is_seller']
         )
         user.set_password(validated_data['password'])

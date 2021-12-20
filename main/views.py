@@ -1,3 +1,4 @@
+from django.db.models import query
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import permissions
@@ -46,3 +47,13 @@ class OrderedItemView_detail(generics.RetrieveUpdateDestroyAPIView):
     queryset=OrderItem.objects.all()
     serializer_class=OrderItemSerializer
     permission_classes=[DjangoModelPermissions]    
+
+class FinalCartView(generics.ListCreateAPIView):
+    queryset=Final_Cart.objects.all()
+    serializer_class=FinalCartSerializer
+    permission_classes=[DjangoModelPermissions]
+
+class FinalCartView_detail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Final_Cart.objects.all()
+    serializer_class=FinalCartSerializer
+    permission_classes=[DjangoModelPermissions]
