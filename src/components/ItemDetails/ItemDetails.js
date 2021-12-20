@@ -92,6 +92,7 @@ export default function ItemDetails(props)
   return (
     <div className="container">
       <div className="card-div">
+      <Grid item xs={12}>
        <Card sx={{ display: 'flex', marginTop: '20px', marginLeft: '50px', marginRight: '50px'}} className="card-body">
         
         <div className="section">
@@ -149,6 +150,7 @@ export default function ItemDetails(props)
         </div>
         </div>
     </Card>
+    </Grid>
     </div>
     </div>
   );
