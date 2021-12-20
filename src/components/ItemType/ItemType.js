@@ -9,11 +9,11 @@ import { CardActionArea } from '@mui/material';
 
 export default function ItemType()
 {
-    const handleFilter = (event) => {
-        event.preventDefault();
+    // const handleFilter = (event) => {
+    //     event.preventDefault();
         
         
-      };
+    //   };
     const [item, setItem] = useState([]);
     const [isLoading, setLoading] = useState(true);
     
@@ -96,7 +96,9 @@ export default function ItemType()
                  return(
                    <div className="item-box" key={slide.item_category_id}>
                   <Card className="card-container">
-                      <CardActionArea onClick={handleFilter}>
+                      <CardActionArea 
+                      // onClick={handleFilter}
+                      >
                   <Card.Body className="item-container">
                  <Card.Title className="item-category">{slide.item_category}</Card.Title>
                  </Card.Body>
