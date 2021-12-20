@@ -49,6 +49,7 @@ export default function SignUp(props) {
             password: password,
             business_name: bName,
             business_location: bLocation,
+            is_seller: false
           }),
           headers: {
             "Content-Type": "application/json",

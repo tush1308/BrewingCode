@@ -19,7 +19,7 @@ export default function Navbar() {
     </div>
     <div className="navbar-right">
     <ShoppingCart className="icon"/>
-    {localStorage.getItem('userName')?
+    {(localStorage.getItem('userName'))?
     <Nav className="navbar-right-element" >
       <NavDropdown title={name}>
         <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>

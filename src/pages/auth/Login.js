@@ -41,20 +41,19 @@ export default function SignInSide() {
   const saveToken = (value) => {
     localStorage.setItem("itemName", value);
     localStorage.getItem("itemName");
-    
   };
 
   const saveUsername = (value) => {
-    let matches = value.charAt(0);
-    localStorage.setItem("userName", matches);
+    let letter = value.charAt(0);
+    localStorage.setItem("userName", letter);
     localStorage.getItem("userName");
-    console.log(matches);
+    console.log(letter);
   };
-  
- const saveUserId = (value) => {
-  localStorage.setItem("userId", value);
-  localStorage.getItem("userId");
-}
+
+  const saveUserId = (value) => {
+    localStorage.setItem("userId", value);
+    localStorage.getItem("userId");
+  };
 
   async function createacc() {
     console.log("hello");
