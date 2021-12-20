@@ -11,14 +11,16 @@ import AppStack from '../navigation/AppStack';
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [pincode,setPincode]=useState("");
     const [verified,setVerified]=useState(false);
-    const storeToken = async (token,id) => {
+    const storeToken = async (token,id,pincode) => {
         try {
             if(token){
               // console.log(id.toString());
               // console.log(token);
               await AsyncStorage.setItem('token',token);
               await AsyncStorage.setItem('userid',id.toString());
+              await AsyncStorage.setItem('pincode',pincode);
               console.log(token);
               setVerified(true);
             }
@@ -44,7 +46,7 @@ export default function Login({ navigation }) {
           const json= await result.json();
           console.log(json);
           // setToken(json.token);
-          storeToken(json.token,json.user_id)
+          storeToken(json.token,json.user_id,json.business_pincode)
         }catch(error){
           console.log("Error: "+error);
         }
@@ -94,7 +96,7 @@ export default function Login({ navigation }) {
               <Text style={{color: '#ACACAC', textDecorationLine: 'underline',alignSelf:'center' }}>Don't have an account? Sign Up</Text>
             </TouchableOpacity>
         </View>
-}
+        } 
           
       </View>
     )

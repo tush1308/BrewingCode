@@ -11,6 +11,7 @@ export default function Detail({navigation,route}){
     // console.log(uid);
     const token=info.token;
     // console.log(token);
+    const pincode=info.pincode;
     const [data,setData]=useState([]);
     const [loading,setLoading]=useState(true);
     const [buy,setBuy]=useState(false);
@@ -44,6 +45,7 @@ export default function Detail({navigation,route}){
                 "quantity":quantity,
                 "cart_item":Number(id),
                 "created_by":Number(uid),
+                "pincode":pincode,
             })
             
         });

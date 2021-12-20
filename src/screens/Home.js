@@ -14,12 +14,15 @@ export default function Home({navigation}){
   const [tloading,setTloading]=useState(true);  //for fetching item type details
   const [types,setTypes]=useState([]);
   const [userId,setUserId]=useState("");
+  const [pincode,setPincode]=useState("");
   const getToken = async () => {
     try {
       const value = await AsyncStorage.getItem('token');
       const uid = await AsyncStorage.getItem('userid');
+      const pincode = await AsyncStorage.getItem('pincode');
       setUserId(uid);
       setToken(value);
+      setPincode(pincode);
       getData(value);
       console.log(uid)
       getTypes(value);
@@ -103,6 +106,7 @@ export default function Home({navigation}){
                                 id:item.item_id,
                                 token:"token "+token,
                                 uid:userId,
+                                pincode:pincode,
                             }})
                             }}>
                         <View style={styles.card}>

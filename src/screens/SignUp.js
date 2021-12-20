@@ -18,12 +18,11 @@ export default function SignUp({ navigation }) {
   }, {
     value: 'Pear',
   }];
-  // const [token,setToken]=useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fname,setFname]=useState("");
   const [lname,setLname]=useState("");
-  //{"old_token": "61ff307144e37f5fddbeb9d4d35d38000fa36933"}
+  const [pincode,setPincode]=useState("");
   const Register=async()=>{
     console.log(BASE_URL+"/register/")
     try{
@@ -41,6 +40,7 @@ export default function SignUp({ navigation }) {
           "business_name":"Business1",
           "business_location":"location1",
           "is_seller":false,
+          "business_pincode":pincode
         }),
       });
       const json= await result.json();
@@ -104,6 +104,14 @@ export default function SignUp({ navigation }) {
               id='password'
               value={password}
               onChangeText={(text) => { setPassword(text) }}
+              placeholderTextColor='#393E46'
+            />
+            <Input
+              placeholder='PinCode'
+              name='pincode'
+              id='pincode'
+              value={pincode}
+              onChangeText={(text) => { setPincode(text) }}
               placeholderTextColor='#393E46'
             />
           </View>
