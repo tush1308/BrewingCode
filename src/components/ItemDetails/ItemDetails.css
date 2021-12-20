@@ -11,5 +11,29 @@ flex-direction: column;
 }
 .card-image{
     margin-top: 5px;
-    margin-bottom: 5px;
+    object-fit: cover !important;
+}
+.card-div
+{
+    margin-left: 40px;
+    margin-right: 40px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+    background-color: #5F85DB;
+}
+.order
+{
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.request-btn
+{
+    margin-top: 15px;
+    margin-left: 50px;
+}
+.btn{
+    border-color: #353941 !important;
+    text-decoration:white !important;
+    background-color: #353941 !important;
 }

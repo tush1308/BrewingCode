@@ -1,17 +1,20 @@
 import {
   Card,
-  Box,
   Typography,
   CardMedia,
-  CircularProgress,
-  CardContent
+  CardContent,
+  Button
 } from "@mui/material";
-import { useEffect, useState } from "react";
 
+import { useEffect, useState } from "react";
 import './ItemDetails.css'
-export default function ItemDetails(props) {
+  
+export default function ItemDetails(props)
+{
   const [card, setCard] = useState([]);
   const [isLoading, setLoading] = useState(true);
+
+  
   useEffect(() => {
     (async () => {
       // console.log(props.match.params.item_id)
@@ -43,7 +46,9 @@ export default function ItemDetails(props) {
   }, []);
   return (
     <div className="container">
+      <div className="card-div">
        <Card sx={{ display: 'flex', marginTop: '20px', marginLeft: '50px', marginRight: '50px'}} className="card-body">
+        
         <div className="section">
         <CardContent className="card-content">
           <Typography component="div" variant="h4">
@@ -60,18 +65,29 @@ export default function ItemDetails(props) {
             Price: {card.item_price}
             {/* sdvvd */}
           </Typography>
-          
         </div>
         </div>
+        
         <CardMedia
         component="img"
         sx={{ width: 151 }}
-        image="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-        alt="Live from space album cover"
+        image={card.item_image}
+        alt={card.item_name}
         className="card-image"
       />
-      
+        <div className="order">
+          <div className="input-field">
+        <Typography>Enter Quantity: </Typography>
+        <input type="text" className="quantity" name="quantity"></input>
+        </div>
+        <div className="request-btn">
+        <Button className="btn" variant="outlined">
+        Request
+        </Button>
+        </div>
+        </div>
     </Card>
+    </div>
     </div>
   );
 }
