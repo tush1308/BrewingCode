@@ -1,11 +1,10 @@
+from enum import unique
 from django.db import models
 from login_signup.models import MyUser
 # Create your models here.
 PAYMENT_METHOD=(
     ('CASH ON DELIVERY','CASH ON DELIVERY'),
-    ('CREDIT CARD','CREDIT CARD'),
-    ('NETBANKING','NETBANKING'),
-    ('UPI','UPI')
+    ('CARD ON DELIVERY','CARD ON DELIVERY')
 )
 class ItemType(models.Model):
     item_category_id=models.AutoField(primary_key=True)
@@ -31,13 +30,13 @@ class OrderItem(models.Model):
     cart_item=models.ForeignKey(Item,on_delete=models.CASCADE,null=True,blank=True)
     price=models.IntegerField(null=True,blank=True)
     quantity=models.IntegerField(default=1)
+    pincode=models.CharField(max_length=6)
     discount=models.DecimalField(max_digits=9, decimal_places=2,null=True,blank=True)
     total_price=models.DecimalField(max_digits=9, decimal_places=2,null=True,blank=True)
     created_by=models.ForeignKey(MyUser,on_delete=models.CASCADE)
 
-
     def __str__(self):
-        return '%s %s' % (self.cart_item,self.quantity)
+        return str(self.cart_item)
  #Calculating Discount
     def calc_disc(self):
         if self.quantity<10:
@@ -71,14 +70,26 @@ class Order(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return str(self.payment_method)
-
+ 
 
 
 class Final_Cart(models.Model):
     final_cart_item=models.OneToOneField(OrderItem,on_delete=models.CASCADE)
-    pincode=models.CharField(max_length=6)
-    sold_to=models.OneToOneField(MyUser,on_delete=models.CASCADE,null=True,blank=True)
+    sold_by=models.ForeignKey(MyUser,on_delete=models.CASCADE,null=True,blank=True)
+    final_cart_quantity=models.IntegerField(null=True,blank=True)
+    final_cart_pincode=models.CharField(max_length=6,default=0)
+    class Meta:
+        ordering=['final_cart_pincode','final_cart_item']
+    def __str__(self):
+        return str(self.final_cart_item)
 
     def save(self,*args,**kwargs):
-        self.sold_to=self.final_cart_item.created_by
+        self.final_cart_quantity=self.final_cart_item.quantity
+        self.sold_by=self.final_cart_item.cart_item.owned_by
+        self.final_cart_pincode=self.final_cart_item.pincode
         super(Final_Cart,self).save(*args,**kwargs)
+
+
+
+            
+            
