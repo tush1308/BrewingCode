@@ -1,0 +1,33 @@
+.page{
+    
+    background-color: lightblue;
+   padding-left: 50px;
+   padding-right: 50px;
+}
+.extension{
+   padding-right: 60px;
+   padding-left: 60px;
+    border-color: red;
+    width: 100%;
+}
+.body{
+    display: flex;
+    flex-direction: row;
+}
+.image
+{
+    width: 50%;
+}
+.text
+{
+    display: flex;
+    flex-direction: column;
+}
+.details
+{
+    width: 50%;
+}
+.amount
+{
+    width: 50%;
+}

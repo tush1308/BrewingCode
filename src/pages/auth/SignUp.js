@@ -6,6 +6,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -22,6 +25,8 @@ export default function SignUp(props) {
   const [lastName, setLastName] = useState("");
   const [bName, setBName] = useState("");
   const [bLocation, setBLocation] = useState("");
+  const [bPincode, setbPincode] = useState("");
+  const [seller, setSeller] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
  const history = useHistory();
@@ -49,7 +54,8 @@ export default function SignUp(props) {
             password: password,
             business_name: bName,
             business_location: bLocation,
-            is_seller: false
+            is_seller: seller,
+            business_pincode: bPincode
           }),
           headers: {
             "Content-Type": "application/json",
@@ -178,6 +184,26 @@ export default function SignUp(props) {
                     onChange={(e) => setBLocation(e.target.value)}
                     style={{ backgroundColor: "white" }}
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="b_pincode"
+                    label="Business Pincode"
+                    type="number"
+                    id="b_pincode"
+                    autoComplete="b_pincode"
+                    value={bPincode.trim()}
+                    onChange={(e) => setbPincode(e.target.value)}
+                    style={{ backgroundColor: "white" }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+            <RadioGroup row aria-label="gender" name="row-radio-buttons-group" onChange={(e) => setSeller(e.target.value)}>
+        <FormControlLabel value="yes" control={<Radio />} label="seller" />
+        <FormControlLabel value="no" control={<Radio />} label="buyer" />
+        </RadioGroup>
                 </Grid>
               </Grid>
               <Button
