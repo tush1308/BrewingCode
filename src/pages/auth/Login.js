@@ -27,7 +27,6 @@ export default function SignInSide() {
   const history = useHistory();
 
   const matches = useMediaQuery("(max-width:600px)");
-  const history = useHistory();
 
   const handleSubmit = (event) => {
     event.preventDefault();

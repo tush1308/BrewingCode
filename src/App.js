@@ -3,6 +3,7 @@ import Login from '../src/pages/auth/Login';
 import SignUp from './pages/auth/SignUp';
 import Items from './components/Items/Items';
 import ItemDetails from './components/ItemDetails/ItemDetails';
+import Cart from './pages/Cart/Cart';
 
 import {
   BrowserRouter as Router,
