@@ -85,9 +85,7 @@ export default function SignInSide() {
       console.log("Error" + error);
       alert("Please enter valid credentials");
       setLoading(false);
-    } // finally {
-    //   setLoading(false);
-    // }
+    } 
   }
 
   return (
