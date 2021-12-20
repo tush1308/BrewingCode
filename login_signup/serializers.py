@@ -34,3 +34,12 @@ class loginSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
         fields = ['email', 'password','user_id']
+    def validate(self, attrs):
+        email = attrs.get('email', '')
+        password = attrs.get('password', '')
+        user = authenticate(email=email, password=password)
+        if not user:
+            raise AuthenticationFailed('Invalid credentials, try again')
+        if not user.is_active:
+            raise AuthenticationFailed('Account disabled, contact admin')
+        return {'email': user.email}
