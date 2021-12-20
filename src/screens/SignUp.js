@@ -11,6 +11,13 @@ import { TextInput } from 'react-native-gesture-handler';
 const BASE_URL="https://rats-hackathon.herokuapp.com/login-signup"
 
 export default function SignUp({ navigation }) {
+  let data = [{
+    value: 'Banana',
+  }, {
+    value: 'Mango',
+  }, {
+    value: 'Pear',
+  }];
   // const [token,setToken]=useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,6 +40,7 @@ export default function SignUp({ navigation }) {
           "password":password,
           "business_name":"Business1",
           "business_location":"location1",
+          "is_seller":false,
         }),
       });
       const json= await result.json();

@@ -10,7 +10,9 @@ export default function Cart(){
     const [data,setData]=useState([]);
     const [id,setId]=useState(0);
     const [token,setToken]=useState('');
-    const [filtered,setFiltered]=useState([]);
+    const [items,setItems]=useState([]);
+    let filtered=[];
+    const [filter,setFilter]=useState([]);
 
     const getId = async () => {
         try {
@@ -18,12 +20,11 @@ export default function Cart(){
           const uid = await AsyncStorage.getItem('userid');
           setId(uid);
           setToken(token);
-          console.log(token);
+          getCart(token);
+        //   console.log(token);
         // console.log(value);
         } catch(e) {
           console.log(e);
-        }finally{
-            getCart(token);
         }
       }
 
@@ -36,16 +37,28 @@ export default function Cart(){
                 'Authorization': 'token '+token},
             
         });
+        const items=await fetch(URL+"main/item",{
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'token '+token},
+            
+        });
         const json=await response.json();
-        console.log(json);
+        const ijson=await items.json();
+        console.log(ijson);
+        setItems(ijson);
         setData(json);
-        // const filtered=json.filter(function (el)
-        // {
-        //   return el.created_by==Number(id);
-        // }
-        // );
-        // console.log(filtered);
-        // setFiltered(filtered);
+        let j=0;
+        for(let i=0;i<json.length;i++){
+            if(json[i].created_by===Number(id)){
+                filtered[j]=json[i];
+                // console.log(json[i])
+                j=j+1;
+            }
+        }
+        console.log(filtered);
+        setFilter(filtered)
         }catch(error){
             console.log(error);
         }finally{
@@ -53,32 +66,35 @@ export default function Cart(){
         }
     }
 
-    // const getImg=async()=>{
-    //     try{
-    //         const response=await fetch(URL+"main/ordered_item/",{
-    //             method:'GET',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 'Authorization': 'token '+token},
-                
-    //         });
-    //     }
-    // }
+    const Item_search=(props)=>{
+        let Found='';
+        for (let i=0;i<items.length;i++){
+          if(items[i].item_id==props.id){
+            Found=items[i].item_name;
+            // console.log(Found);
+            return(
+              <Text>{items[i].item_name} {items[i].item_brand}</Text>
+            );
+          }
+        }
+      }
 
     useEffect(() => {
         getId();
       }, []);
+      
 return(
     <View>
         {loading?<ActivityIndicator/>:
             <FlatList
-            data={data}
+            data={filter}
             keyExtractor={({ id }, index) => id}
             // numColumns={3}
             renderItem={({item,index})=>
             <View style={{margin:10}}>
                 <Text style={{fontSize:22}}>item id: {item.cart_item} Quantity: {item.quantity} TotalP:{item.total_price}</Text>
                 <Text style={{fontSize:22}}>Created by {item.created_by}</Text>
+                <Item_search id={item.cart_item}/>
             </View>
             }
         />

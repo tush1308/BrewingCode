@@ -19,6 +19,7 @@ export default function Login({ navigation }) {
               // console.log(token);
               await AsyncStorage.setItem('token',token);
               await AsyncStorage.setItem('userid',id.toString());
+              console.log(token);
               setVerified(true);
             }
         } catch (e) {
@@ -93,7 +94,7 @@ export default function Login({ navigation }) {
               <Text style={{color: '#ACACAC', textDecorationLine: 'underline',alignSelf:'center' }}>Don't have an account? Sign Up</Text>
             </TouchableOpacity>
         </View>
-          }
+}
           
       </View>
     )

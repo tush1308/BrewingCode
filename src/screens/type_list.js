@@ -7,7 +7,7 @@ export default function Type_list({navigation,route}){
     const id=info.id;
     const token=info.token;
 
-    const getData=async(token)=>{
+    const getData=async()=>{
         setLoading(true);
         try{
             const result=await fetch(url,{
@@ -19,13 +19,15 @@ export default function Type_list({navigation,route}){
             setData(json);
         }catch(error){
             console.log(error);
-            // Alert.alert(error);
         }finally{
-            
-            console.log("Done");
-            console.log(data);
             setLoading(false);
         }
 
     }
+
+    return(
+        <View>
+            <Text>Hi</Text>
+        </View>
+    )
 }

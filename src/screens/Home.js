@@ -21,8 +21,9 @@ export default function Home({navigation}){
       setUserId(uid);
       setToken(value);
       getData(value);
+      console.log(uid)
       getTypes(value);
-    console.log(value);
+    // console.log(value);
     } catch(e) {
       console.log(e);
     }
@@ -43,7 +44,7 @@ export default function Home({navigation}){
             // Alert.alert(error);
         }finally{
             
-            console.log("Done");
+            // console.log("Done");
             // console.log(data);
             setLoading(false);
         }
@@ -52,7 +53,7 @@ export default function Home({navigation}){
     
     const getTypes=async(token)=>{
         try{
-            const types=await fetch(URL+"main/item_type_detail/",{
+            const types=await fetch(URL+"main/item_type/",{
                 method:'GET',
                 headers: {'Authorization': 'token '+token},
             });
@@ -60,7 +61,7 @@ export default function Home({navigation}){
             console.log(type);
             setTypes(type);
         }catch(e){
-            console.log(error);
+            console.log("Error"+e);
         }finally{
             setTloading(false);
         }
