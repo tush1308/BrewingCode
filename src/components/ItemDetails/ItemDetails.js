@@ -17,7 +17,7 @@ export default function ItemDetails(props) {
   const [isLoading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState("");
   const [orderItem, setOrderitem] = useState("");
-
+  const [pincode, setPincode] = useState("");
   useEffect(() => {
     (async () => {
       // console.log(props.match.params.item_id)
@@ -67,6 +67,7 @@ export default function ItemDetails(props) {
             quantity: quantity,
             cart_item: Number(orderItem),
             created_by: Number(userId),
+            pincode: pincode,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -133,6 +134,18 @@ export default function ItemDetails(props) {
                 autoComplete="new-quantity"
                 value={quantity.trim()}
                 onChange={(e) => setQuantity(e.target.value)}
+                style={{ backgroundColor: "white" }}
+              />
+              <TextField
+                required
+                fullWidth
+                name="pincode"
+                label="Pincode"
+                type="number"
+                id="pincode"
+                autoComplete="new-pincode"
+                value={pincode.trim()}
+                onChange={(e) => setPincode(e.target.value)}
                 style={{ backgroundColor: "white" }}
               />
             </div>

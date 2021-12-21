@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <div className="navbar">
       <div className="navbar-left">
-        <div className="brand-name">Brewing Code</div>
+          <div className="brand-name">Brewing Code</div>
       </div>
       <div className="navbar-right">
         <Link to="/Cart">
