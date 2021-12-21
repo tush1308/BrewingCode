@@ -31,10 +31,10 @@ export default function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
     createacc();
   };
 
@@ -47,7 +47,7 @@ export default function SignInSide() {
     let letter = value.charAt(0);
     localStorage.setItem("userName", letter);
     localStorage.getItem("userName");
-    console.log(letter);
+    // console.log(letter);
   };
 
   const saveUserId = (value) => {
@@ -56,7 +56,7 @@ export default function SignInSide() {
   };
 
   async function createacc() {
-    console.log("hello");
+    // console.log("hello");
     try {
       let result = await fetch(
         "https://rats-hackathon.herokuapp.com/login-signup/login/",
@@ -73,12 +73,12 @@ export default function SignInSide() {
         }
       );
       result = await result.json();
-      console.log(result);
+      // console.log(result);
       saveToken(result.token);
       saveUsername(result.email);
       saveUserId(result.user_id);
       if (result.token) {
-        console.log("hello");
+        // console.log("hello");
         history.push("/Items");
       }
     } catch (error) {

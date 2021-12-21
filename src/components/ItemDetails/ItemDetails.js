@@ -36,7 +36,7 @@ export default function ItemDetails(props) {
           }
         );
         itemData = await response.json();
-        console.log(itemData);
+        // console.log(itemData);
       } catch (error) {
         console.log("Error" + error);
         itemData = [];
@@ -49,13 +49,13 @@ export default function ItemDetails(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(quantity);
-    console.log(orderItem);
+    // console.log(quantity);
+    // console.log(orderItem);
     createOrder();
   };
 
   async function createOrder() {
-    console.log("order");
+    // console.log("order");
     try {
       let token = localStorage.getItem("itemName");
       let userId = localStorage.getItem("userId");
@@ -77,7 +77,7 @@ export default function ItemDetails(props) {
       );
       //console.log(token);
       result = await result.json();
-      console.log(result);
+      // console.log(result);
     } catch (error) {
       console.log("Error" + error);
     }

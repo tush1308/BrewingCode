@@ -33,15 +33,15 @@ export default function SignUp(props) {
  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
     createacc();
   };
 
   async function createacc() {
-    console.log("hello");
+    // console.log("hello");
     try {
       let result = await fetch(
         "https://rats-hackathon.herokuapp.com/login-signup/register/",
@@ -65,7 +65,7 @@ export default function SignUp(props) {
         
       );
       result = await result.json();
-      console.log(result);
+      // console.log(result);
       if(result.old_token){
         alert("Signed in Successfully! Please verify your email");
         history.push("/");

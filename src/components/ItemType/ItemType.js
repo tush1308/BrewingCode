@@ -9,11 +9,7 @@ import { CardActionArea } from '@mui/material';
 
 export default function ItemType()
 {
-    // const handleFilter = (event) => {
-    //     event.preventDefault();
-        
-        
-    //   };
+  
     const [item, setItem] = useState([]);
     const [isLoading, setLoading] = useState(true);
     
@@ -22,9 +18,9 @@ export default function ItemType()
           let itemData;
           try{
             let token = localStorage.getItem('itemName')
-            console.log(token);
+            // console.log(token);
               let response = await fetch(
-                          "https://rats-hackathon.herokuapp.com/main/item_type_detail/",
+                          "https://rats-hackathon.herokuapp.com/main/item_type_detail/1",
                           {
                             method: "GET",
                             headers: {
@@ -35,7 +31,7 @@ export default function ItemType()
                           }
                         );
                         itemData = (await response.json());
-                        console.log(itemData);
+                        // console.log(itemData);
           }
           catch (error) {
                     console.log("Error" + error);

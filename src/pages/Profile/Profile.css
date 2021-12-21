@@ -1,0 +1,19 @@
+.content{
+    margin-left: 100px;
+}
+.profile-body
+{
+    margin-top: 35px;
+}
+.profile
+{
+    font-family: Poppins;
+     font-style: normal;
+    font-weight: 500;
+     font-size: 35px;
+    margin-top: 20px;
+}
+.divider
+{
+    background-color: #90B8F8 !important;
+}
