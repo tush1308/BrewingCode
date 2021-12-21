@@ -21,13 +21,13 @@ from .utils import Util
 class MyUserList(generics.ListAPIView):
     queryset=MyUser.objects.all()
     serializer_class=MyUserSerializer
-    permission_classes=IsAuthenticated
+    permission_classes=[IsAuthenticated]
 
 
 class MyUserDetail(generics.RetrieveUpdateAPIView):
     queryset = MyUser.objects.all()
     serializer_class = MyUserSerializer
-    permission_classes=IsAuthenticated
+    permission_classes=[IsAuthenticated]
  
 
 
@@ -100,4 +100,5 @@ class LoginView(generics.CreateAPIView):
             data['token'] = token
             data['user_id']=user.user_id
             data['is_seller']=str(user.is_seller)
+            data['business_pincode']=user.business_pincode
             return Response(data, status = status.HTTP_200_OK)
