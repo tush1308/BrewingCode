@@ -29,7 +29,7 @@ useEffect(() => {
         let itemData;
         try{
           let token = localStorage.getItem('itemName')
-          console.log(token);
+          // console.log(token);
             let response = await fetch(
                         "https://rats-hackathon.herokuapp.com/main/item/",
                         {
@@ -42,7 +42,7 @@ useEffect(() => {
                         }
                       );
                       itemData = (await response.json());
-                      console.log(itemData);
+                      // console.log(itemData);
         }
         catch (error) {
                   console.log("Error" + error);
@@ -120,13 +120,7 @@ useEffect(() => {
                       >
                         Price: {card.item_price}
                       </Typography>
-                      <Typography
-                        variant="body2"
-                        className="item-element"
-                        style={{ color: "#353941" }}
-                      >
-                        Quantity: {card.available_quantity}
-                      </Typography>
+                      
                       </div>
                       </div>
                     </CardContent>
