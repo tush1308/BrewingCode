@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+#Restframework imports
 from rest_framework import permissions
+#Swagger imports
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+#Static images imports
 from django.conf.urls.static import static
 from django.conf import settings
 
+#Added  Swagger 
 schema_view = get_schema_view(
    openapi.Info(
       title="RATS API",
@@ -35,12 +39,12 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('login-signup/',include('login_signup.urls')),
-    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('oauth-login-signup/',include('oauth_login.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('main/',include('main.urls')),
+    path('admin/', admin.site.urls),#For admin site
+    path('login-signup/',include('login_signup.urls')),#For login_signup app
+    path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),#For swagger UI
+    path('oauth-login-signup/',include('oauth_login.urls')),#For social oauth
+    path('accounts/', include('allauth.urls')),#For social oauth
+    path('main/',include('main.urls')),#For main app
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

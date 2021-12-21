@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import *
-from rest_framework.authtoken import views
+#from rest_framework.authtoken import views 
 #Create URL's here
 urlpatterns=[
     path('users/', MyUserList.as_view()),

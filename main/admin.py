@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import *
 # Register your models here.
+
+#Creating Customized view of admin panel for each of the model
 @admin.register(ItemType)
 class ItemTypeModelAdmin(admin.ModelAdmin):
     list_display=['item_category_id','item_category','created_at']

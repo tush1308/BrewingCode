@@ -6,6 +6,8 @@ PAYMENT_METHOD=(
     ('CASH ON DELIVERY','CASH ON DELIVERY'),
     ('CARD ON DELIVERY','CARD ON DELIVERY')
 )
+
+#Class for Item Category #For eg. Shoes,Keyboards,Paints etc. #Created so that user can fetch their items easily
 class ItemType(models.Model):
     item_category_id=models.AutoField(primary_key=True)
     item_category=models.CharField(max_length=200)
@@ -14,6 +16,7 @@ class ItemType(models.Model):
     def __str__(self):
         return str(self.item_category)
 
+#Class for Each Item 
 class Item(models.Model):
     item_id=models.AutoField(primary_key=True)
     item_type=models.ForeignKey(ItemType,on_delete=models.CASCADE)
@@ -25,7 +28,8 @@ class Item(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return str(self.item_name)
-    
+
+#For adding items in cart
 class OrderItem(models.Model):
     cart_item=models.ForeignKey(Item,on_delete=models.CASCADE,null=True,blank=True)
     price=models.IntegerField(null=True,blank=True)
@@ -58,7 +62,7 @@ class OrderItem(models.Model):
         super(OrderItem,self).save(*args,**kwargs)
 
 
-
+#For creating a order of all items in the cart
 class Order(models.Model):
     order_id=models.AutoField(primary_key=True)
     user=models.ForeignKey(MyUser,on_delete=models.CASCADE)
@@ -72,7 +76,7 @@ class Order(models.Model):
         return str(self.payment_method)
  
 
-
+#Tried to provide a discount based on pincode of user
 class Final_Cart(models.Model):
     final_cart_item=models.OneToOneField(OrderItem,on_delete=models.CASCADE)
     sold_by=models.ForeignKey(MyUser,on_delete=models.CASCADE,null=True,blank=True)

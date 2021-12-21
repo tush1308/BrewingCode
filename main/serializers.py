@@ -2,7 +2,8 @@ from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
 from .models import Final_Cart, Order,ItemType,Item, OrderItem
-
+# Create your serializers here
+# Created modelserializer for each model
 class ItemTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model=ItemType
