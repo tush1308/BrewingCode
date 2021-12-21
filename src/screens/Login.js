@@ -13,6 +13,25 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState("");
     const [pincode,setPincode]=useState("");
     const [verified,setVerified]=useState(false);
+
+    const logval=()=>{
+      console.log("Hi");
+       if(email==""||password==""){
+        if(email==""&&password==""){
+          Alert.alert("Please enter your email and password")
+        }
+        else if(email==""){
+          Alert.alert("Please enter your username")
+        }
+        else{
+          Alert.alert("Please enter your password")
+        }
+      }
+      else{
+        SignIn();
+      }
+    }
+
     const storeToken = async (token,id,pincode) => {
         try {
             if(token){
@@ -45,8 +64,11 @@ export default function Login({ navigation }) {
           });
           const json= await result.json();
           console.log(json);
-          // setToken(json.token);
-          storeToken(json.token,json.user_id,json.business_pincode)
+          if(json.token){
+            storeToken(json.token,json.user_id,json.business_pincode)
+          }else{
+            alert("Please enter valid credentials");
+          }
         }catch(error){
           console.log("Error: "+error);
         }
@@ -59,7 +81,7 @@ export default function Login({ navigation }) {
           <Text style={styles.message}>Welcome Back</Text>
           <View style={{ alignItems: 'center' }}>
             <Input
-              placeholder='Username'
+              placeholder='Email'
               name='email'
               id='email'
               value={email}
@@ -86,7 +108,7 @@ export default function Login({ navigation }) {
 
           <View style={{marginLeft:5}}>
             <TouchableOpacity style={styles.button}
-              onPress={()=>{SignIn()}}
+              onPress={()=>{logval()}}
               >
               <Text style={{color:buttonTextColor}}>Login</Text>
             </TouchableOpacity>

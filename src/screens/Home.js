@@ -75,19 +75,21 @@ export default function Home({navigation}){
       }, []);
     return(
         <View style={styles.container}>
-            <Button onPress={()=>{navigation.navigate('Logout')}} title="Logout"/>
+            <TouchableOpacity onPress={()=>{navigation.navigate('Logout')}}>
+                <Text>Logout</Text>
+            </TouchableOpacity>
             <View style={styles.section2}>
                 {tloading?<ActivityIndicator/>:
                 <FlatList
                     data={types}
                     keyExtractor={({ id }, index) => id}
-                    numColumns={3}
+                    horizontal={true}
                     renderItem={({item,index})=>
                     <TouchableOpacity onPress={()=>{
                         
                         }}>
                     <View style={{margin:10}}>
-                        <Text>{item.item_category}</Text>
+                        <Text style={{fontSize:20}}>{item.item_category}</Text>
                     </View>
                     </TouchableOpacity>
                     }
@@ -138,7 +140,8 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     section2:{
-        flex:0.2,
+        // flex:0.2,
+        alignItems:'center'
     },
     list: {
       flex: 1,

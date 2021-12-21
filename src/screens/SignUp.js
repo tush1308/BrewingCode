@@ -11,13 +11,6 @@ import { TextInput } from 'react-native-gesture-handler';
 const BASE_URL="https://rats-hackathon.herokuapp.com/login-signup"
 
 export default function SignUp({ navigation }) {
-  let data = [{
-    value: 'Banana',
-  }, {
-    value: 'Mango',
-  }, {
-    value: 'Pear',
-  }];
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fname,setFname]=useState("");
@@ -45,13 +38,12 @@ export default function SignUp({ navigation }) {
       });
       const json= await result.json();
       console.log(json);
-      if(json.response=="Successfully registered a new user"){
-        console.log(json.token);
-        navigation.navigate('Loading',{info:{
-          token:json.token,
-          email:json.email,
-          userId:json.user_id,
-        }});
+      if(json.old_token){
+        alert("User registered .\nVerify your email and login");
+        navigation.navigate('Login');
+      }
+      else{
+        alert(json.email);
       }
     }catch(error){
       console.log("Error"+error);
