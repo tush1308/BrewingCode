@@ -18,6 +18,7 @@
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
 }
 
 .items-info .product-img img {
@@ -40,8 +41,6 @@
   font-size: 2.2rem;
   display: flex;
   align-items: center;
-  text-transform: capitalize;
-  color: var(--main-color);
 }
 
 .items-info .title p {
@@ -52,49 +51,6 @@
   align-items: center;
   text-transform: capitalize;
   text-align: left;
-  color: var(--primary-color);
-}
-
-.add-minus-quantity {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.add-minus-quantity .number{
-  font-size: larger;
-  color: #90B8F8;
-  background-color: black;
-  padding: 2% 7% 2% 7%;
-  border-radius: 20%;
-}
-
-.add-minus-quantity button {
-  border: none;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-}
-
-.add-minus-quantity input {
-  width: 6rem;
-  height: 3rem;
-  border: 0.141rem solid var(--primary-color);
-  box-sizing: border-box;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.6rem;
-  text-align: center;
-  text-transform: capitalize;
-  color: var(--primary-color);
-  margin: 0 1rem;
-  border-radius: 0.5rem;
-  outline: none;
-  background-color: transparent;
-}
-
-.add-minus-quantity input:focus {
-  outline: none;
 }
 
 .price {
@@ -107,8 +63,13 @@
   font-style: normal;
   font-weight: bold;
   font-size: 2rem;
+  display: flex;
   text-transform: capitalize;
   color: var(--main-color);
+}
+
+.price h4{
+  display: flex;
 }
 
 .remove-item {
@@ -121,19 +82,12 @@
 .remove-item button {
   border: none;
   background-color: transparent;
+  display: flex;
 }
 
 /* hover effects  */
 .fa-trash-alt {
   color: #ed4848;
-}
-
-.fa-plus:hover {
-  color: #42c157;
-}
-
-.fa-minus:hover {
-  color: #ffb800;
 }
 
 .fa-plus,
@@ -168,11 +122,6 @@
     width: 100%;
     text-align: center;
     margin-bottom: 2rem;
-  }
-
-  .add-minus-quantity {
-    margin: 2rem 0 2rem 0;
-    justify-content: flex-start;
   }
 
   .price {
