@@ -31,3 +31,5 @@ SCOPE OF THIS PROJECT:-
 1. The seller can set the customized discount on each product so it becomes more affordable for     buyers.
 2. We can also provide the user discount based on the pincode of the location. So if multiple users from the same pincode order their requirements then they are eligible for an extra discount.
 3. If a particular user places a order in bulk then he will be eligible for a bonus discount.
+4. Buyer could also be given a discount based on the quantity of items in the same item category
+5. This project can also be extended by adding the refund policy if the user has paid and then cancelled his order.

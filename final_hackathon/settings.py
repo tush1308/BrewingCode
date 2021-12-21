@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    #Added by default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,15 +40,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    #Added manually
+    #For Django-rest-framework
     'rest_framework',
     'rest_framework_swagger',
-    'rest_framework.authtoken',  
+    'rest_framework.authtoken', 
+    #For Swagger Docs
     'drf_yasg',
+    #For adding CorsPolicy
     'corsheaders',
+    #For adding Google Auth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',  
+    #Created apps
     'login_signup',
     'oauth_login',
     'main'
@@ -55,8 +62,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    #Added whitenoise to deploy it on Heroku
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #Added CorsPolicy for integrating the API's with frontend
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = 'Asia/Kolkata' #For syncing the timezone with IST
 
 USE_I18N = True
 
@@ -135,9 +144,10 @@ USE_TZ = True
 
 
 
-
+#For saving and viewing the uploaded images in local repo
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static\images')]
+
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
@@ -148,8 +158,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Added Manually
+
+#Added custom user model
 AUTH_USER_MODEL = 'login_signup.MyUser'
 
+#Set Token Authentication as default authentication
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication'
@@ -161,6 +174,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 
+#Adding google as social_oauth
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -178,12 +192,15 @@ SITE_ID = 2
 LOGIN_REDIRECT_URL = '/oauth-login-signup/home'
 LOGOUT_REDIRECT_URL = '/'
 
+#For E-mail verification
+
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 
+#For allowing sites to cors policy
 CORS_ALLOWED_ORIGINS = [
     "https://rats-hackathon.herokuapp.com",
     "http://localhost:8000",
@@ -191,11 +208,12 @@ CORS_ALLOWED_ORIGINS = [
 
 ]
 
+#For SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER=config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER=config('EMAIL_HOST_USER')#Added in .env file with sensitive information
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')#Added in .env file with sensitive information
 FRONT_END_HOST="http://localhost:3000"
 
